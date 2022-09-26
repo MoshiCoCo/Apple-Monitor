@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <jmxConfigurator/>
+
+    <property name="LOG_PATH" value="/tmp"/>
+    <property name="LOG_LEVEL" value="INFO"/>
+    <property name="MAX_DAY" value="20"/>
+    <property name="MAX_SIZE" value="100MB"/>
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+
+    <appender name="HISTORY_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/apple-monitor.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <maxHistory>${MAX_DAY}</maxHistory>
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}/apple-monitor-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxFileSize>${MAX_SIZE}</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{10} - %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ROOT" class="ch.qos.logback.core.FileAppender">
+        <File>${LOG_PATH}/apple-monitor.log</File>
+        <append>false</append>
+        <encoder>
+            <pattern>%msg%n%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %gray(%d{yyyy-MM-dd HH:mm:ss}) %green(%-5level) %gray([%thread]) %cyan(%logger{10}) : %msg%n
+            </pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <root level="${LOG_LEVEL}">
+        <level value="${LOG_LEVEL}"/>
+        <appender-ref ref="ROOT"/>
+        <appender-ref ref="HISTORY_LOG"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

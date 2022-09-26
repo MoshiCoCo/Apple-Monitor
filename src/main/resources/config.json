@@ -1,0 +1,14 @@
+{
+  "cronExpressions": "*/10 * * * * ?",
+  "barkPushToken": "m3B**********SkP",
+  "barkPushUrl": "https://bark.example.com/push",
+  "deviceCodes": [
+    "MQ0D3CH/A"
+  ],
+  "location": "广东 深圳 南山区",
+  "storeWhiteList": [
+    "益田假日",
+    "珠江新城",
+    "天环广场"
+  ]
+}
