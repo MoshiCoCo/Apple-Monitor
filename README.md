@@ -4,9 +4,8 @@
 
 ## 使用效果
 
-![控制台日志](docs/images/console-view.png)
+![效果图](docs/images/view.png)
 
-![Bark](docs/images/bark-view.png)
 
 ## 如何使用
 
@@ -34,14 +33,16 @@
 }
 ```
 
-| 值               | 含义                                           |
-|-----------------|----------------------------------------------|
-| cronExpressions | 执行的cron表达式                                   |
-| barkPushUrl     | bark推送服务器地址                                  |
-| barkPushToken   | bark token                                   |
-| deviceCodes     | 需要监控的产品代码                                    |
-| location        | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区 |
-| storeWhiteList  | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有  |
+| 值               | 含义                                                  |
+|-----------------|-----------------------------------------------------|
+| cronExpressions | 执行的cron表达式                                          |
+| barkPushUrl     | bark推送服务器地址                                         |
+| barkPushToken   | bark token                                          |
+| deviceCodes     | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md) |
+| location        | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区        |
+| storeWhiteList  | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有         |
+
+*苹果产品型号代码请参考 [产品型号列表](./docs/apple-device-codes.md)*
 
 ## 支持的推送方式
 
