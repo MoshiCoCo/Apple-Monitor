@@ -1,5 +1,6 @@
 package top.misec.applemonitor.config;
 
+import java.util.Collections;
 import java.util.List;
 
 import cn.hutool.core.util.StrUtil;
@@ -11,10 +12,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Data
 @Slf4j
-public class MonitorCfg {
+public class AppleTaskConfig {
     public List<String> deviceCodes;
-    public String barkPushUrl;
-    public String barkPushToken;
     public String location;
     public List<String> storeWhiteList;
     public String cronExpressions;
@@ -35,14 +34,14 @@ public class MonitorCfg {
             return false;
         }
 
-        if (StrUtil.isBlank(barkPushUrl) && StrUtil.isBlank(barkPushToken)) {
-            log.info("bark推送的url和token不能为空，类似于 https://api.day.app/xxxxxx ");
-            return false;
-        }
+//        if (StrUtil.isBlank(barkPushUrl) && StrUtil.isBlank(barkPushToken)) {
+//            log.info("bark推送的url和token不能为空，类似于 https://api.day.app/xxxxxx ");
+//            return false;
+//        }
 
-        if (storeWhiteList.isEmpty()) {
+        if (storeWhiteList == null) {
+            storeWhiteList = Collections.emptyList();
             log.info("需要监控的门店为空，默认监控您附近的所有门店");
-            return false;
         }
 
         log.info("配置校验通过，开始监控{}附近的Apple直营店", location);

@@ -1,27 +1,30 @@
 package top.misec.applemonitor.config;
 
-import com.alibaba.fastjson2.JSONObject;
-import top.misec.applemonitor.utils.FileReader;
-
 import java.io.File;
+
+import com.alibaba.fastjson2.JSONObject;
+
+import top.misec.applemonitor.utils.FileReader;
 
 /**
  * @author moshi
  */
 public class CfgSingleton {
-    
-    public MonitorCfg config;
+
+    public AppCfg config;
+
     private volatile static CfgSingleton uniqueInstance;
-    
+
     private CfgSingleton() {
         String currentPath = System.getProperty("user.dir") + File.separator + "config.json";
         String configStr = FileReader.readFile(currentPath);
-        
-        this.config = JSONObject.parseObject(configStr, MonitorCfg.class);
+
+        this.config = JSONObject.parseObject(configStr, AppCfg.class);
+
     }
-    
+
     public static CfgSingleton getInstance() {
-        
+
         if (uniqueInstance == null) {
             synchronized (CfgSingleton.class) {
                 if (uniqueInstance == null) {
@@ -31,6 +34,6 @@ public class CfgSingleton {
         }
         return uniqueInstance;
     }
-    
-    
+
+
 }
