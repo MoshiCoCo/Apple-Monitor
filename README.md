@@ -24,7 +24,7 @@
       "MPXR3CH/A"
     ],
     "location": "广东 深圳 南山区",
-    "storeNameWhiteList": [
+    "storeWhiteList": [
       "益田假日",
       "珠江新城",
       "天环广场"

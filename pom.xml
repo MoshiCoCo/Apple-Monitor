@@ -5,7 +5,7 @@
 
     <groupId>top.misec</groupId>
     <artifactId>apple-monitor</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>apple-monitor</name>
     <description>apple-monitor</description>
 
@@ -56,7 +56,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
 
 
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
