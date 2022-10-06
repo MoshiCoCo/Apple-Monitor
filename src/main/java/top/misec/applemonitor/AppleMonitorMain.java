@@ -14,11 +14,11 @@ public class AppleMonitorMain {
 
     public static void main(String[] args) {
 
-        AppCfg config = CfgSingleton.getInstance().config;
+        AppCfg appCfg = CfgSingleton.getInstance().config;
 
-        if (config.getAppleTaskConfig().valid()) {
+        if (appCfg.getAppleTaskConfig().valid()) {
             Setting setting = new Setting();
-            setting.set("top.misec.applemonitor.job.AppleMonitor.monitor", config.getAppleTaskConfig().getCronExpressions());
+            setting.set("top.misec.applemonitor.job.AppleMonitor.monitor", appCfg.getAppleTaskConfig().getCronExpressions());
 
             CronUtil.setCronSetting(setting);
             CronUtil.setMatchSecond(true);

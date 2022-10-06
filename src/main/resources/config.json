@@ -1,14 +1,36 @@
 {
-  "cronExpressions": "*/10 * * * * ?",
-  "barkPushToken": "m3B**********SkP",
-  "barkPushUrl": "https://bark.example.com/push",
-  "deviceCodes": [
-    "MQ0D3CH/A"
-  ],
-  "location": "广东 深圳 南山区",
-  "storeWhiteList": [
-    "益田假日",
-    "珠江新城",
-    "天环广场"
-  ]
+  "appleTaskConfig": {
+    "cronExpressions": "*/10 * * * * ?",
+    "deviceCodes": [
+      "MQ0D3CH/A",
+      "MPXR3CH/A"
+    ],
+    "location": "广东 深圳 南山区",
+    "storeNameWhiteList": [
+      "益田假日",
+      "珠江新城",
+      "天环广场"
+    ]
+  },
+  "pushConfig": {
+    "barkPushUrl": "https://api.day.app/push",
+    "barkPushToken": "bark push token",
+    "SC_KEY": "",
+    "SCT_KEY": "",
+    "TG_BOT_TOKEN": "",
+    "TG_USER_ID": "",
+    "TG_USE_CUSTOM_URL": false,
+    "DING_TALK_URL": "",
+    "DING_TALK_SECRET": "",
+    "PUSH_PLUS_TOKEN": "",
+    "WE_COM_GROUP_TOKEN": "",
+    "WE_COM_APP_CORPID": "",
+    "WE_COM_APP_CORP_SECRET": "",
+    "WE_COM_APP_AGENT_ID": 0,
+    "WE_COM_APP_MEDIA_ID": "",
+    "WE_COM_APP_TO_USER": "",
+    "PROXY_HTTP_HOST": "",
+    "PROXY_SOCKET_HOST": "",
+    "PROXY_PORT": 0
+  }
 }
