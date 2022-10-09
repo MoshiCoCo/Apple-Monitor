@@ -58,12 +58,12 @@
 |-----------------|-----------------------------------------------------|
 | cronExpressions | 执行的cron表达式                                          |
 | barkPushUrl     | bark推送服务器地址,默认为  https://api.day.app/push           |
-| barkPushToken   | bark token                                          |
+| barkPushToken   | bark token    [获取BarkToken请参考](./docs/use-bark.md)  |
 | deviceCodes     | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md) |
 | location        | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区        |
 | storeWhiteList  | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有         |
 
-*Bark的使用文档请参考 [Bark使用文档](https://github.com/Finb/Bark/blob/master/README.md)*
+*如何使用Bark请参考 [Bark使用文档](./docs/use-bark.md)*
 
 *苹果产品型号代码请参考 [产品型号列表](./docs/apple-device-codes.md)*
 
