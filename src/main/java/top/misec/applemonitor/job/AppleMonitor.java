@@ -1,20 +1,19 @@
 package top.misec.applemonitor.job;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
-
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import top.misec.applemonitor.config.AppCfg;
 import top.misec.applemonitor.config.CfgSingleton;
 import top.misec.applemonitor.push.impl.BarkPush;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Moshi
@@ -65,6 +64,14 @@ public class AppleMonitor {
                         .getJSONObject("pickupMessage");
 
                 JSONArray stores = pickupMessage.getJSONArray("stores");
+
+                if (stores == null) {
+                    log.info("您可能填错产品代码了，目前仅支持监控中国大陆地区的产品");
+                    log.info("下面是是错误信息");
+                    log.info(pickupMessage.toString());
+                    return;
+                }
+
 
                 stores.stream().filter(store -> {
                     JSONObject storeJson = (JSONObject) store;
