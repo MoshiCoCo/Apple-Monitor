@@ -10,8 +10,10 @@
 2. 输入bark官方的推送地址：`https://api.day.app`，点击右上角的确定按钮。
    ![](images/bark1.png)
 3. 点击刚刚添加的推送服务，测试下是否能够收到通知。
-4. 如果可以收到推送，点击底部的设置按钮，找到DeviceToken选项，点击即可复制token，将token填入config.json中。
+4. 如果能够收到通知，点击第一个推送URL的复制按钮，得到类似于 `https://api.day.app/xqk********nbf/这里改成你自己的推送内容`
+   这样的地址 ，其中`xqk********nbf`就是推送的token。
 
 ## 私有化的Bark推送服务（可选）
 
-https://api.day.app 是Bark作者提供的一个公共推送服务，如果你想自己私有化部署bark推送服务端，请参考bark作者的[部署文档](https://day.app/2018/06/bark-server-document/)
+https://api.day.app
+是Bark作者提供的一个公共推送服务，如果你想自己私有化部署bark推送服务端，请参考bark作者的[部署文档](https://day.app/2018/06/bark-server-document/)
