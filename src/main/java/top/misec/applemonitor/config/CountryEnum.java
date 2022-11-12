@@ -13,7 +13,12 @@ public enum CountryEnum {
      * Country，WebsiteURL
      */
     CN("CN", "https://www.apple.com.cn"),
-    JP("JP", "https://www.apple.com/jp");
+    CN_MACAO("CN-MACAO", "https://www.apple.com/mo"),
+    CN_HK("CN-HK", "https://www.apple.com/hk"),
+    CN_TAIWAN("CN-TW", "https://www.apple.com/tw"),
+    JP("JP", "https://www.apple.com/jp"),
+
+    ;
 
     final String country;
     final String url;

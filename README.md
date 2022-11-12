@@ -2,7 +2,10 @@
 
 一个用 Java 实现的 Apple 线下商店库存监控工具,支持bark,dingtalk，企业微信等监控方式。
 
-目前在支持中国大陆地区的基础上增加了对日本地区的支持。
+目前已经支持监控中国大陆，中国香港，中国澳门，中国台湾，日本等地区的苹果商店。
+
+Currently, it supports monitoring Apple Stores in mainland China, Hong Kong, Macau, China Taiwan, Japan and other
+regions.
 
 ## 使用效果
 
@@ -22,7 +25,7 @@
 | cronExpressions | 执行的cron表达式                                          |
 | barkPushUrl     | bark推送服务器地址,默认为  https://api.day.app/push           |
 | barkPushToken   | bark token    [获取BarkToken请参考](./docs/use-bark.md)  |
-| country         | 需要监控的国家，目前仅支持"CN"，"JP"                              |
+| country         | 需要监控的国家，目前仅支持"CN"，"JP" ，CN-MACAO，CN-HK，CN-TW        |
 | location        | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区        |
 | deviceCodes     | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md) |
 | storeWhiteList  | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有         |
