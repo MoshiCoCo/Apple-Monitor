@@ -1,11 +1,11 @@
 package top.misec.applemonitor.config;
 
-import java.util.Collections;
-import java.util.List;
-
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Moshi
@@ -17,6 +17,8 @@ public class AppleTaskConfig {
     public String location;
     public List<String> storeWhiteList;
     public String cronExpressions;
+
+    public String country;
 
     public boolean valid() {
         if (deviceCodes.isEmpty()) {
@@ -34,10 +36,10 @@ public class AppleTaskConfig {
             return false;
         }
 
-//        if (StrUtil.isBlank(barkPushUrl) && StrUtil.isBlank(barkPushToken)) {
-//            log.info("bark推送的url和token不能为空，类似于 https://api.day.app/xxxxxx ");
-//            return false;
-//        }
+        if (StrUtil.isBlank(country)) {
+            log.info("国家代码不能为空，类似于 CN , JP");
+            return false;
+        }
 
         if (storeWhiteList == null) {
             storeWhiteList = Collections.emptyList();

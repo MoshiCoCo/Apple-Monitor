@@ -9,6 +9,7 @@ import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import top.misec.applemonitor.config.AppCfg;
 import top.misec.applemonitor.config.CfgSingleton;
+import top.misec.applemonitor.config.CountryEnum;
 import top.misec.applemonitor.push.impl.BarkPush;
 
 import java.util.HashMap;
@@ -18,7 +19,6 @@ import java.util.Map;
 /**
  * @author Moshi
  */
-
 @Slf4j
 public class AppleMonitor {
     private final AppCfg CONFIG = CfgSingleton.getInstance().config;
@@ -45,41 +45,47 @@ public class AppleMonitor {
         queryMap.put("parts.0", productCode);
         queryMap.put("location", locationName);
 
-        String url = "https://www.apple.com.cn/shop/fulfillment-messages?" + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
+
+        String baseUrl = CountryEnum.getUrlByCountry(CONFIG.getAppleTaskConfig().getCountry());
+
+        String url = baseUrl + "/shop/fulfillment-messages?" + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
 
 
         try {
 
             HttpResponse httpResponse = HttpRequest.get(url).execute();
+
             if (!httpResponse.isOk()) {
                 log.info("正在持续监控中...");
                 return;
             }
 
-            JSONObject jsonObject = JSONObject.parseObject(httpResponse.body());
+            JSONObject responseJsonObject = JSONObject.parseObject(httpResponse.body());
 
-            if ("200".equals(jsonObject.getJSONObject("head").get("status"))) {
-                JSONObject pickupMessage = jsonObject.getJSONObject("body")
+            if ("200".equals(responseJsonObject.getJSONObject("head").get("status"))) {
+
+                JSONObject pickupMessage = responseJsonObject.getJSONObject("body")
                         .getJSONObject("content")
                         .getJSONObject("pickupMessage");
 
                 JSONArray stores = pickupMessage.getJSONArray("stores");
 
                 if (stores == null) {
-                    log.info("您可能填错产品代码了，目前仅支持监控中国大陆地区的产品");
-                    log.info("下面是是错误信息");
+                    log.info("您可能填错产品代码了，目前仅支持监控中国大陆和日本地区的产品，注意不同国家的机型型号不同，下面是是错误信息");
                     log.info(pickupMessage.toString());
                     return;
                 }
 
-
                 stores.stream().filter(store -> {
-                    JSONObject storeJson = (JSONObject) store;
-                    String storeName = storeJson.getString("storeName");
 
                     if (CONFIG.getAppleTaskConfig().getStoreWhiteList().isEmpty()) {
                         return true;
                     }
+
+                    JSONObject storeInfo = (JSONObject) store;
+
+                    String storeName = storeInfo.getString("storeName");
+
                     return CONFIG.getAppleTaskConfig().getStoreWhiteList().stream().anyMatch(k -> storeName.contains(k) || k.contains(storeName));
 
                 }).forEach(k -> {
@@ -89,18 +95,20 @@ public class AppleMonitor {
                     JSONObject partsAvailability = storeJson.getJSONObject("partsAvailability");
 
                     String storeNames = storeJson.getString("storeName").trim();
-                    String status = partsAvailability.getJSONObject(productCode).getString("pickupDisplay");
 
-                    String deviceName = partsAvailability.getJSONObject(productCode).getJSONObject("messageTypes")
+
+                    String deviceName = partsAvailability.getJSONObject(productCode)
+                            .getJSONObject("messageTypes")
                             .getJSONObject("regular")
                             .getString("storePickupProductTitle");
 
-                    String content = storeNames + deviceName + partsAvailability.getJSONObject(productCode).getString("pickupSearchQuote");
+
+                    String status = partsAvailability.getJSONObject(productCode).getString("pickupDisplay");
 
                     if ("available".equals(status)) {
+                        String content = storeNames + " - " + deviceName + " - " + partsAvailability.getJSONObject(productCode).getString("pickupSearchQuote");
                         BarkPush.push(content, CONFIG.getPushConfig().getBarkPushUrl(), CONFIG.getPushConfig().barkPushToken);
                     }
-                    log.info(content);
 
                 });
             }

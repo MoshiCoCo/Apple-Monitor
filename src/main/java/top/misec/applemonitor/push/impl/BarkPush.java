@@ -14,6 +14,7 @@ public class BarkPush {
 
     public static void push(String content, String pushApi, String pushToken) {
 
+        log.info(content);
 
         BarkPushBody barkPushBody = new BarkPushBody();
 

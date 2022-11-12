@@ -7,6 +7,12 @@
 | iPhone 14 Pro 128GB 金色   | MQ083ZD/A |
 | iPhone 14 Pro 128GB 暗紫色  | MQ0G3ZD/A |
 
+## 常用型号列表（日本）
+
+| 型号                           | 型号代码     |
+|------------------------------|----------|
+| iPhone 14 Pro 256GB スペースブラック | MQ0Q3J/A |
+
 ## iPhone 14（A2884）
 
 iPhone 14 128GB 午夜色 MPU93CH/A
