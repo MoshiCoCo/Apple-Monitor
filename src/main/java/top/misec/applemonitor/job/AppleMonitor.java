@@ -105,10 +105,13 @@ public class AppleMonitor {
 
                     String status = partsAvailability.getJSONObject(productCode).getString("pickupDisplay");
 
+                    String content = storeNames + " - " + deviceName + " - " + partsAvailability.getJSONObject(productCode).getString("pickupSearchQuote");
+
                     if ("available".equals(status)) {
-                        String content = storeNames + " - " + deviceName + " - " + partsAvailability.getJSONObject(productCode).getString("pickupSearchQuote");
                         BarkPush.push(content, CONFIG.getPushConfig().getBarkPushUrl(), CONFIG.getPushConfig().barkPushToken);
                     }
+
+                    log.info(content);
 
                 });
             }
