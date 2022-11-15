@@ -1,3 +1,18 @@
+<div align="center">
+<h1 align="center">AppleMonitor</h1>
+
+[![GitHub stars](https://img.shields.io/github/stars/MoshiCoCo/Apple-Monitor?style=flat-square)](https://github.com/MoshiCoCo/Apple-Monitor/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/MoshiCoCo/Apple-Monitor?style=flat-square)](https://github.com/MoshiCoCo/Apple-Monitor/network)
+[![GitHub issues](https://img.shields.io/github/issues/MoshiCoCo/Apple-Monitor?style=flat-square)](https://github.com/MoshiCoCo/Apple-Monitor/issues)
+[![GitHub license](https://img.shields.io/github/license/MoshiCoCo/Apple-Monitor?style=flat-square)](https://github.com/MoshiCoCo/Apple-Monitor/blob/main/LICENSE)
+[![GitHub All Releases](https://img.shields.io/github/downloads/MoshiCoCo/Apple-Monitor/total?style=flat-square)](https://github.com/MoshiCoCo/Apple-Monitor/releases)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/MoshiCoCo/Apple-Monitor?style=flat-square)](https://github.com/MoshiCoCo/Apple-Monitor/releases)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJunzhouLiu%2FBILIBILI-HELPER-PRE&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true)](https://hits.seeyoufarm.com)
+</div>
+
+
+
+
 ## AppleMonitor
 
 一个用 Java 实现的 Apple 线下商店库存监控工具,支持bark,dingtalk，企业微信等监控方式。
@@ -95,3 +110,14 @@ location はお住まいの地域の郵便番号 (例: 197-0804)、deviceCodes �
 - bark
 - 企业微信
 - server酱
+
+## 致谢
+
+感谢 JetBrains 对本项目的支持。
+
+[![JetBrains](docs/images/jetbrains.svg)](https://www.jetbrains.com/?from=Apple-Monitor)
+
+## License
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/MoshiCoCo/Apple-Monitor.svg)](https://starchart.cc/MoshiCoCo/Apple-Monitor)
