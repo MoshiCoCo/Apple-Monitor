@@ -1,6 +1,7 @@
 package top.misec.applemonitor.job;
 
 import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
@@ -30,94 +31,101 @@ public class AppleMonitor {
 
         try {
             for (String k : productList) {
-                doMonitor(CONFIG.getAppleTaskConfig().getLocation(), k);
+                doMonitor(k);
+                Thread.sleep(2500);
             }
         } catch (Exception e) {
             log.error("AppleMonitor error", e);
         }
     }
 
-    public void doMonitor(String locationName, String productCode) {
+    public void doMonitor(String productCode) {
 
-        Map<String, Object> queryMap = new HashMap<>(10);
+        Map<String, Object> queryMap = new HashMap<>(5);
         queryMap.put("pl", "true");
         queryMap.put("mts.0", "regular");
         queryMap.put("parts.0", productCode);
-        queryMap.put("location", locationName);
+        queryMap.put("location", CONFIG.getAppleTaskConfig().getLocation());
 
-
-        String baseUrl = CountryEnum.getUrlByCountry(CONFIG.getAppleTaskConfig().getCountry());
-
-        String url = baseUrl + "/shop/fulfillment-messages?" + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
-
+        String url = CountryEnum.getUrlByCountry(CONFIG.getAppleTaskConfig().getCountry()) + "/shop/fulfillment-messages?"
+                + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
 
         try {
-
             HttpResponse httpResponse = HttpRequest.get(url).execute();
-
             if (!httpResponse.isOk()) {
-                log.info("正在持续监控中...");
+                log.info("请求过于频繁，请调整cronExpressions，建议您参考推荐的cron表达式");
                 return;
             }
 
             JSONObject responseJsonObject = JSONObject.parseObject(httpResponse.body());
 
-            if ("200".equals(responseJsonObject.getJSONObject("head").get("status"))) {
+            JSONObject pickupMessage = responseJsonObject.getJSONObject("body")
+                    .getJSONObject("content")
+                    .getJSONObject("pickupMessage");
 
-                JSONObject pickupMessage = responseJsonObject.getJSONObject("body")
-                        .getJSONObject("content")
-                        .getJSONObject("pickupMessage");
+            JSONArray stores = pickupMessage.getJSONArray("stores");
 
-                JSONArray stores = pickupMessage.getJSONArray("stores");
+            if (stores == null || stores.isEmpty()) {
+                log.info("您可能填错产品代码了，目前仅支持监控中国和日本地区的产品，注意不同国家的机型型号不同，下面是是错误信息");
+                log.debug(pickupMessage.toString());
+                return;
+            }
 
-                if (stores == null) {
-                    log.info("您可能填错产品代码了，目前仅支持监控中国大陆和日本地区的产品，注意不同国家的机型型号不同，下面是是错误信息");
-                    log.info(pickupMessage.toString());
-                    return;
+            stores.stream().filter(store -> {
+                if (CONFIG.getAppleTaskConfig().getStoreWhiteList().isEmpty()) {
+                    return true;
+                } else {
+                    return filterStore((JSONObject) store);
+                }
+            }).forEach(k -> {
+
+                JSONObject storeJson = (JSONObject) k;
+
+                JSONObject partsAvailability = storeJson.getJSONObject("partsAvailability");
+
+                String storeNames = storeJson.getString("storeName").trim();
+                String deviceName = partsAvailability.getJSONObject(productCode)
+                        .getJSONObject("messageTypes")
+                        .getJSONObject("regular")
+                        .getString("storePickupProductTitle");
+                String content = storeNames + " - " + deviceName + " - " + partsAvailability.getJSONObject(productCode).getString("pickupSearchQuote");
+
+                if (judgingStoreInventory(storeJson, productCode)) {
+                    JSONObject retailStore = storeJson.getJSONObject("retailStore");
+                    content += buildPickupInformation(retailStore);
+                    log.info(content);
+                    BarkPush.push(content, CONFIG.getPushConfig().getBarkPushUrl(), CONFIG.getPushConfig().barkPushToken);
                 }
 
-                stores.stream().filter(store -> {
+                log.info(content);
+            });
 
-                    if (CONFIG.getAppleTaskConfig().getStoreWhiteList().isEmpty()) {
-                        return true;
-                    }
-
-                    JSONObject storeInfo = (JSONObject) store;
-
-                    String storeName = storeInfo.getString("storeName");
-
-                    return CONFIG.getAppleTaskConfig().getStoreWhiteList().stream().anyMatch(k -> storeName.contains(k) || k.contains(storeName));
-
-                }).forEach(k -> {
-
-                    JSONObject storeJson = (JSONObject) k;
-
-                    JSONObject partsAvailability = storeJson.getJSONObject("partsAvailability");
-
-                    String storeNames = storeJson.getString("storeName").trim();
-
-
-                    String deviceName = partsAvailability.getJSONObject(productCode)
-                            .getJSONObject("messageTypes")
-                            .getJSONObject("regular")
-                            .getString("storePickupProductTitle");
-
-
-                    String status = partsAvailability.getJSONObject(productCode).getString("pickupDisplay");
-
-                    String content = storeNames + " - " + deviceName + " - " + partsAvailability.getJSONObject(productCode).getString("pickupSearchQuote");
-
-                    if ("available".equals(status)) {
-                        BarkPush.push(content, CONFIG.getPushConfig().getBarkPushUrl(), CONFIG.getPushConfig().barkPushToken);
-                    }
-
-                    log.info(content);
-
-                });
-            }
         } catch (Exception e) {
             log.error("AppleMonitor error", e);
         }
 
+    }
+
+    private boolean judgingStoreInventory(JSONObject storeJson, String productCode) {
+
+        JSONObject partsAvailability = storeJson.getJSONObject("partsAvailability");
+        String status = partsAvailability.getJSONObject(productCode).getString("pickupDisplay");
+        return "available".equals(status);
+
+    }
+
+    private String buildPickupInformation(JSONObject retailStore) {
+        String distanceWithUnit = retailStore.getString("distanceWithUnit");
+        String twoLineAddress = retailStore.getJSONObject("address").getString("twoLineAddress");
+        String daytimePhone = retailStore.getJSONObject("address").getString("daytimePhone");
+        String lo = CONFIG.getAppleTaskConfig().getLocation();
+
+        String messageTemplate = " 取货地址: {},电话: {},距离{} :{}";
+        return StrUtil.format(messageTemplate, twoLineAddress.replace("\n", " "), daytimePhone, lo, distanceWithUnit);
+    }
+
+    private boolean filterStore(JSONObject storeInfo) {
+        String storeName = storeInfo.getString("storeName");
+        return CONFIG.getAppleTaskConfig().getStoreWhiteList().stream().anyMatch(k -> storeName.contains(k) || k.contains(storeName));
     }
 }

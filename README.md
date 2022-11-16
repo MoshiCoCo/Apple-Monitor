@@ -10,9 +10,6 @@
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJunzhouLiu%2FBILIBILI-HELPER-PRE&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true)](https://hits.seeyoufarm.com)
 </div>
 
-
-
-
 ## AppleMonitor
 
 一个用 Java 实现的 Apple 线下商店库存监控工具,支持bark,dingtalk，企业微信等监控方式。
@@ -35,26 +32,21 @@ regions.
 
 **配置文件参数解释**
 
-| 值               | 含义                                                  |
-|-----------------|-----------------------------------------------------|
-| cronExpressions | 执行的cron表达式                                          |
-| barkPushUrl     | bark推送服务器地址,默认为  https://api.day.app/push           |
-| barkPushToken   | bark token    [获取BarkToken请参考](./docs/use-bark.md)  |
-| country         | 需要监控的国家，目前仅支持"CN"，"JP" ，CN-MACAO，CN-HK，CN-TW        |
-| location        | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区        |
-| deviceCodes     | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md) |
-| storeWhiteList  | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有         |
+| 值               | 含义                                                                |
+|-----------------|-------------------------------------------------------------------|
+| cronExpressions | 执行的cron表达式,建议执行时间间隔设置为 （监控的设备型号数*3）秒，如果你不会写corn表达式，建议使用程序输出的推荐表达式 |
+| barkPushUrl     | bark推送服务器地址,默认为  https://api.day.app/push                         |
+| barkPushToken   | bark token    [获取BarkToken请参考](./docs/use-bark.md)                |
+| country         | 需要监控的国家，目前仅支持"CN"，"JP" ，CN-MACAO，CN-HK，CN-TW                      |
+| location        | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区                      |
+| deviceCodes     | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)               |
+| storeWhiteList  | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有                       |
 
 注：
 如果需要监控日本地区的情况，请将country设置为JP，
 location设置为你所在的区域邮编，例如：197-0804，deviceCodes设置为你需要监控的产品型号（日本版本型号），storeWhiteList设置为你需要监控的商店，例如
 新宿 ，不填则默认监控所有。
 
-ノート：
-日本の状況を監視する必要がある場合は、国を JP に設定し、
-location はお住まいの地域の郵便番号 (例: 197-0804)、deviceCodes は監視対象の製品モデル (日本語版モデル)、storeWhiteList は監視対象の店舗 (
-例: ) に設定されます。
-新宿 は、入力されていない場合、デフォルトですべてが監視されます。
 
 日本地域プロファイル参照例 [config-jp.json](./src/main/resources/config-jp.json)
 
@@ -118,6 +110,7 @@ location はお住まいの地域の郵便番号 (例: 197-0804)、deviceCodes �
 [![JetBrains](docs/images/jetbrains.svg)](https://www.jetbrains.com/?from=Apple-Monitor)
 
 ## License
+
 ## Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/MoshiCoCo/Apple-Monitor.svg)](https://starchart.cc/MoshiCoCo/Apple-Monitor)

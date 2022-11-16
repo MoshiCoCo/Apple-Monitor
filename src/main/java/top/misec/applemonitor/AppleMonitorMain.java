@@ -1,5 +1,6 @@
 package top.misec.applemonitor;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.cron.CronUtil;
 import cn.hutool.setting.Setting;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +25,16 @@ public class AppleMonitorMain {
         AppCfg appCfg = CfgSingleton.getInstance().config;
 
         if (appCfg.getAppleTaskConfig().valid()) {
+
+
+            int size = appCfg.getAppleTaskConfig().deviceCodes.size();
+
+            String cronExpress = StrUtil.format("*/{} * * * * ?", size * 3);
+            log.info("您本次共监控{}个机型，过短的执行时间间隔会导致请求被限制，建议您的cron表达式设置为:{}", size, cronExpress);
+
             Setting setting = new Setting();
-            setting.set("top.misec.applemonitor.job.AppleMonitor.monitor", appCfg.getAppleTaskConfig().getCronExpressions());
+            setting.set("top.misec.applemonitor.job.AppleMonitor.monitor", appCfg.getAppleTaskConfig().cronExpressions);
+
 
             CronUtil.setCronSetting(setting);
             CronUtil.setMatchSecond(true);
