@@ -47,7 +47,6 @@ regions.
 location设置为你所在的区域邮编，例如：197-0804，deviceCodes设置为你需要监控的产品型号（日本版本型号），storeWhiteList设置为你需要监控的商店，例如
 新宿 ，不填则默认监控所有。
 
-
 日本地域プロファイル参照例 [config-jp.json](./src/main/resources/config-jp.json)
 
 **配置文件示例**
@@ -102,6 +101,10 @@ location设置为你所在的区域邮编，例如：197-0804，deviceCodes设�
 - bark
 - 企业微信
 - server酱
+
+## 常见问题
+
+- 如果使用 Windows 系统的CMD执行出现乱码，执行前先执行 `chcp 65001` 这条命令。
 
 ## 致谢
 

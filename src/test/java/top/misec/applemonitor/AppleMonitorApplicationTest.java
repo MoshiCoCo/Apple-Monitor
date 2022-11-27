@@ -18,7 +18,8 @@ class AppleMonitorApplicationTest {
 
     @Test
     void pushTest() {
-        AppCfg config = getAppCfg();
+        String jpCfg = "config-jp.json";
+        AppCfg config = getAppCfg(jpCfg);
 
         BarkPush.push("test", config.getPushConfig().getBarkPushUrl(), config.getPushConfig().getBarkPushToken());
 
@@ -26,7 +27,8 @@ class AppleMonitorApplicationTest {
 
     @Test
     void monitorTest() {
-        AppCfg config = getAppCfg();
+        String jpCfg = "config-jp.json";
+        AppCfg config = getAppCfg(jpCfg);
 
         log.info("config: {}", config);
 
@@ -34,8 +36,9 @@ class AppleMonitorApplicationTest {
         appleMonitor.monitor();
     }
 
-    private AppCfg getAppCfg() {
-        return CfgSingleton.getInstance().config;
+
+    private AppCfg getAppCfg(String fileName) {
+        return CfgSingleton.getTestInstance(fileName).config;
     }
 
 

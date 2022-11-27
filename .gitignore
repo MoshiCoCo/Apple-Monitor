@@ -35,3 +35,4 @@ build/
 /src/main/resources/*.yaml
 /src/main/resources/*.properties
 /config.json
+/config*.json

@@ -1,14 +1,14 @@
 package top.misec.applemonitor;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.cron.CronUtil;
 import cn.hutool.setting.Setting;
 import lombok.extern.slf4j.Slf4j;
 import top.misec.applemonitor.config.AppCfg;
 import top.misec.applemonitor.config.CfgSingleton;
-
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author moshi
@@ -26,7 +26,6 @@ public class AppleMonitorMain {
 
         if (appCfg.getAppleTaskConfig().valid()) {
 
-
             int size = appCfg.getAppleTaskConfig().deviceCodes.size();
 
             String cronExpress = StrUtil.format("*/{} * * * * ?", size * 3);
@@ -39,15 +38,15 @@ public class AppleMonitorMain {
             CronUtil.setCronSetting(setting);
             CronUtil.setMatchSecond(true);
             CronUtil.start(true);
+        }
 
-            LOCK.lock();
-            try {
-                STOP.await();
-            } catch (InterruptedException e) {
-                log.info("AppleMonitorMain is interrupted");
-            } finally {
-                LOCK.unlock();
-            }
+        LOCK.lock();
+        try {
+            STOP.await();
+        } catch (InterruptedException e) {
+            log.info("AppleMonitorMain is interrupted");
+        } finally {
+            LOCK.unlock();
         }
 
 
