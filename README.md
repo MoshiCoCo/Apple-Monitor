@@ -10,6 +10,15 @@
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJunzhouLiu%2FBILIBILI-HELPER-PRE&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true)](https://hits.seeyoufarm.com)
 </div>
 
+- [AppleMonitor](#applemonitor)
+- [使用效果](#使用效果)
+- [如何使用](#如何使用)
+- [支持的推送方式](#支持的推送方式)
+- [常见问题](#常见问题)
+- [致谢](#致谢)
+- [License](#license)
+- [Stargazers over time](#stargazers-over-time)
+
 ## AppleMonitor
 
 一个用 Java 实现的 Apple 线下商店库存监控工具,支持bark,dingtalk，企业微信等监控方式。
@@ -32,15 +41,15 @@ regions.
 
 **配置文件参数解释**
 
-| 值               | 含义                                                                |
-|-----------------|-------------------------------------------------------------------|
+| 值              | 含义                                                                                                                   |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | cronExpressions | 执行的cron表达式,建议执行时间间隔设置为 （监控的设备型号数*3）秒，如果你不会写corn表达式，建议使用程序输出的推荐表达式 |
-| barkPushUrl     | bark推送服务器地址,默认为  https://api.day.app/push                         |
-| barkPushToken   | bark token    [获取BarkToken请参考](./docs/use-bark.md)                |
-| country         | 需要监控的国家，目前仅支持"CN"，"JP" ，CN-MACAO，CN-HK，CN-TW                      |
-| location        | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区                      |
-| deviceCodes     | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)               |
-| storeWhiteList  | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有                       |
+| barkPushUrl     | bark推送服务器地址,默认为  https://api.day.app/push                                                                    |
+| barkPushToken   | bark token    [获取BarkToken请参考](./docs/use-bark.md)                                                                |
+| country         | 需要监控的国家，目前仅支持"CN"，"JP" ，CN-MACAO，CN-HK，CN-TW                                                          |
+| location        | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区                                        |
+| deviceCodes     | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)                                                     |
+| storeWhiteList  | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有                                 |
 
 注：
 如果需要监控日本地区的情况，请将country设置为JP，
