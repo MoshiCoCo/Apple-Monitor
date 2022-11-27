@@ -15,6 +15,7 @@
 - [如何使用](#如何使用)
 - [支持的推送方式](#支持的推送方式)
 - [常见问题](#常见问题)
+- [关注我](#关注我)
 - [致谢](#致谢)
 - [License](#license)
 - [Stargazers over time](#stargazers-over-time)
@@ -106,14 +107,18 @@ location设置为你所在的区域邮编，例如：197-0804，deviceCodes设�
 
 ## 支持的推送方式
 
-- 钉钉
+- 钉钉 暂不可用
 - bark
-- 企业微信
-- server酱
+- 企业微信 暂不可用
+- server酱 暂不可用
 
 ## 常见问题
 
 - 如果使用 Windows 系统的CMD执行出现乱码，执行前先执行 `chcp 65001` 这条命令。
+
+## 关注我
+
+![wechatOrCode](./docs/images/wxgzh.png)
 
 ## 致谢
 
