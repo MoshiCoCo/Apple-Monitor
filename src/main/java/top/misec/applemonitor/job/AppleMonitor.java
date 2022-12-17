@@ -1,21 +1,24 @@
 package top.misec.applemonitor.job;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
+
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
+import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
-import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import top.misec.applemonitor.config.AppCfg;
 import top.misec.applemonitor.config.CfgSingleton;
 import top.misec.applemonitor.config.CountryEnum;
 import top.misec.applemonitor.push.impl.BarkPush;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Moshi
@@ -41,17 +44,28 @@ public class AppleMonitor {
 
     public void doMonitor(String productCode) {
 
+        String baseCountryURL = CountryEnum.getUrlByCountry(CONFIG.getAppleTaskConfig().getCountry());
+
         Map<String, Object> queryMap = new HashMap<>(5);
         queryMap.put("pl", "true");
+        queryMap.put("true", "true");
         queryMap.put("mts.0", "regular");
         queryMap.put("parts.0", productCode);
         queryMap.put("location", CONFIG.getAppleTaskConfig().getLocation());
 
-        String url = CountryEnum.getUrlByCountry(CONFIG.getAppleTaskConfig().getCountry()) + "/shop/fulfillment-messages?"
+
+        Map<String, List<String>> headers = new HashMap<>(10);
+        ArrayList<String> referer = new ArrayList<>();
+
+        referer.add(baseCountryURL + "/shop/buy-iphone/iphone-14-pro/" + productCode);
+
+        headers.put(Header.REFERER.getValue(), referer);
+
+        String url = baseCountryURL + "/shop/fulfillment-messages?"
                 + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
 
         try {
-            HttpResponse httpResponse = HttpRequest.get(url).execute();
+            HttpResponse httpResponse = HttpRequest.get(url).header(headers).execute();
             if (!httpResponse.isOk()) {
                 log.info("请求过于频繁，请调整cronExpressions，建议您参考推荐的cron表达式");
                 return;
@@ -95,6 +109,7 @@ public class AppleMonitor {
                     content += buildPickupInformation(retailStore);
                     log.info(content);
                     BarkPush.push(content, CONFIG.getPushConfig().getBarkPushUrl(), CONFIG.getPushConfig().barkPushToken);
+                    BarkPush.push(content, CONFIG.getPushConfig().getBarkPushUrl(), "hxeGD2F5Gr2WM6q5Me89aG");
                 }
 
                 log.info(content);
