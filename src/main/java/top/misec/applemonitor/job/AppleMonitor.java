@@ -21,7 +21,7 @@ import top.misec.applemonitor.config.CountryEnum;
 import top.misec.applemonitor.push.impl.BarkPush;
 
 /**
- * @author Moshi
+ * @author MoshiCoCo
  */
 @Slf4j
 public class AppleMonitor {
@@ -38,30 +38,23 @@ public class AppleMonitor {
                 Thread.sleep(2500);
             }
         } catch (Exception e) {
-            log.error("AppleMonitor error", e);
+            log.error("AppleMonitor Error", e);
         }
     }
 
     public void doMonitor(String productCode) {
 
-        String baseCountryURL = CountryEnum.getUrlByCountry(CONFIG.getAppleTaskConfig().getCountry());
-
         Map<String, Object> queryMap = new HashMap<>(5);
         queryMap.put("pl", "true");
-        queryMap.put("true", "true");
         queryMap.put("mts.0", "regular");
         queryMap.put("parts.0", productCode);
         queryMap.put("location", CONFIG.getAppleTaskConfig().getLocation());
 
+        String baseCountryUrl = CountryEnum.getUrlByCountry(CONFIG.getAppleTaskConfig().getCountry());
 
-        Map<String, List<String>> headers = new HashMap<>(10);
-        ArrayList<String> referer = new ArrayList<>();
+        Map<String, List<String>> headers = buildHeaders(baseCountryUrl, productCode);
 
-        referer.add(baseCountryURL + "/shop/buy-iphone/iphone-14-pro/" + productCode);
-
-        headers.put(Header.REFERER.getValue(), referer);
-
-        String url = baseCountryURL + "/shop/fulfillment-messages?"
+        String url = baseCountryUrl + "/shop/fulfillment-messages?"
                 + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
 
         try {
@@ -79,10 +72,14 @@ public class AppleMonitor {
 
             JSONArray stores = pickupMessage.getJSONArray("stores");
 
-            if (stores == null || stores.isEmpty()) {
+            if (stores == null) {
                 log.info("您可能填错产品代码了，目前仅支持监控中国和日本地区的产品，注意不同国家的机型型号不同，下面是是错误信息");
                 log.debug(pickupMessage.toString());
                 return;
+            }
+
+            if (stores.isEmpty()) {
+                log.info("您所在的 {} 附近没有Apple直营店，请检查您的地址是否正确", CONFIG.getAppleTaskConfig().getLocation());
             }
 
             stores.stream().filter(store -> {
@@ -121,6 +118,13 @@ public class AppleMonitor {
 
     }
 
+    /**
+     * check store inventory
+     *
+     * @param storeJson   store json
+     * @param productCode product code
+     * @return boolean
+     */
     private boolean judgingStoreInventory(JSONObject storeJson, String productCode) {
 
         JSONObject partsAvailability = storeJson.getJSONObject("partsAvailability");
@@ -129,6 +133,12 @@ public class AppleMonitor {
 
     }
 
+    /**
+     * build pickup information
+     *
+     * @param retailStore retailStore
+     * @return pickup message
+     */
     private String buildPickupInformation(JSONObject retailStore) {
         String distanceWithUnit = retailStore.getString("distanceWithUnit");
         String twoLineAddress = retailStore.getJSONObject("address").getString("twoLineAddress");
@@ -142,5 +152,23 @@ public class AppleMonitor {
     private boolean filterStore(JSONObject storeInfo) {
         String storeName = storeInfo.getString("storeName");
         return CONFIG.getAppleTaskConfig().getStoreWhiteList().stream().anyMatch(k -> storeName.contains(k) || k.contains(storeName));
+    }
+
+    /**
+     * build request headers
+     *
+     * @param baseCountryUrl base country url
+     * @param productCode    product code
+     * @return headers
+     */
+    private Map<String, List<String>> buildHeaders(String baseCountryUrl, String productCode) {
+
+        ArrayList<String> referer = new ArrayList<>();
+        referer.add(baseCountryUrl + "/shop/buy-iphone/iphone-14-pro/" + productCode);
+
+        Map<String, List<String>> headers = new HashMap<>(10);
+        headers.put(Header.REFERER.getValue(), referer);
+
+        return headers;
     }
 }
