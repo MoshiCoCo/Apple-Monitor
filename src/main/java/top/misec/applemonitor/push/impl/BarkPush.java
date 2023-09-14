@@ -19,19 +19,14 @@ public class BarkPush {
 
     public static void push(String content, String pushApi, String pushToken) {
 
-        BarkPushBody barkPushBody = new BarkPushBody();
-
-        barkPushBody.setDeviceKey(pushToken);
-        barkPushBody.setBody(content);
-        barkPushBody.setTitle("苹果商店监控");
-        barkPushBody.setCategory("苹果商店监控");
-//        barkPushBody.setIcon("https://image-pics.oss-cn-hangzhou.aliyuncs.com/1.jpg");
-        barkPushBody.setGroup("Apple Monitor");
-
-
-        HttpResponse httpResponse = HttpRequest
-                .post(pushApi)
-                .body(JSON.toJSONString(barkPushBody))
+        HttpResponse httpResponse = HttpRequest.post(pushApi)
+                .body(JSON.toJSONString(BarkPushBody.builder()
+                        .deviceKey(pushToken)
+                        .body(content)
+                        .title("苹果商店监控")
+                        .category("苹果商店监控")
+                        .group("Apple Monitor")
+                        .build()))
                 .header(Header.CONTENT_TYPE, ContentType.JSON.getValue())
                 .execute();
 

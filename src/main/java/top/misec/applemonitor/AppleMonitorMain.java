@@ -26,9 +26,10 @@ public class AppleMonitorMain {
 
         if (appCfg.getAppleTaskConfig().valid()) {
 
-            int size = appCfg.getAppleTaskConfig().deviceCodes.size();
+            int size = appCfg.getAppleTaskConfig().deviceCodeList.size();
 
             String cronExpress = StrUtil.format("*/{} * * * * ?", size * 3);
+
             log.info("您本次共监控{}个机型，过短的执行时间间隔会导致请求被限制，建议您的cron表达式设置为:{}", size, cronExpress);
 
             Setting setting = new Setting();

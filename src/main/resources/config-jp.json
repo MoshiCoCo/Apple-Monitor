@@ -1,37 +1,41 @@
 {
   "appleTaskConfig": {
-    "cronExpressions": "*/10 * * * * ?",
+    "cronExpressions": "*/12 * * * * ?",
     "country": "JP",
     "location": "197-0804",
-    "deviceCodes": [
-      "MQ0Q3J/A",
-      "MQ9A3J/A"
-    ],
-    "storeWhiteList": [
-      "新宿",
-      "名古屋栄",
-      "銀座"
+    "deviceCodeList": [
+      {
+        "deviceCode": "MTUG3J/A",
+        "storeWhiteList": [
+          "新宿",
+          "名古屋栄",
+          "銀座"
+        ],
+        "pushConfigs": [
+          {
+            "barkPushUrl": "",
+            "barkPushToken": "",
+            "feishuBotWebhooks": "",
+            "feishuBotSecret": ""
+          }
+        ]
+      },
+      {
+        "deviceCode": "MTU73J/A",
+        "storeWhiteList": [
+          "新宿",
+          "名古屋栄",
+          "銀座"
+        ],
+        "pushConfigs": [
+          {
+            "barkPushUrl": "",
+            "barkPushToken": "",
+            "feishuBotWebhooks": "",
+            "feishuBotSecret": ""
+          }
+        ]
+      }
     ]
-  },
-  "pushConfig": {
-    "barkPushUrl": "https://api.day.app/push",
-    "barkPushToken": "bark push token",
-    "SC_KEY": "",
-    "SCT_KEY": "",
-    "TG_BOT_TOKEN": "",
-    "TG_USER_ID": "",
-    "TG_USE_CUSTOM_URL": false,
-    "DING_TALK_URL": "",
-    "DING_TALK_SECRET": "",
-    "PUSH_PLUS_TOKEN": "",
-    "WE_COM_GROUP_TOKEN": "",
-    "WE_COM_APP_CORPID": "",
-    "WE_COM_APP_CORP_SECRET": "",
-    "WE_COM_APP_AGENT_ID": 0,
-    "WE_COM_APP_MEDIA_ID": "",
-    "WE_COM_APP_TO_USER": "",
-    "PROXY_HTTP_HOST": "",
-    "PROXY_SOCKET_HOST": "",
-    "PROXY_PORT": 0
   }
 }

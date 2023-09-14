@@ -4,15 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.Getter;
 import top.misec.applemonitor.push.Push;
-import top.misec.applemonitor.push.impl.DingTalkPush;
-import top.misec.applemonitor.push.impl.DingTalkSecretPush;
-import top.misec.applemonitor.push.impl.PushPlusPush;
-import top.misec.applemonitor.push.impl.ServerChanPush;
-import top.misec.applemonitor.push.impl.ServerChanTurboPush;
-import top.misec.applemonitor.push.impl.TelegramCustomUrlPush;
-import top.misec.applemonitor.push.impl.TelegramPush;
-import top.misec.applemonitor.push.impl.WeComAppPush;
-import top.misec.applemonitor.push.impl.WeComPush;
+import top.misec.applemonitor.push.impl.*;
 import top.misec.applemonitor.push.model.PushMetaInfo;
 
 
@@ -33,6 +25,10 @@ public class PushConfig {
      * barkPushToken
      */
     public String barkPushToken;
+
+    public String feishuBotWebhooks;
+    public String feishuBotSecret;
+
 
     /**
      * 电报 .

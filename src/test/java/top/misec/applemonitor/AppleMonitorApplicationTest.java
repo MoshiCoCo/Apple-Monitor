@@ -1,12 +1,12 @@
 package top.misec.applemonitor;
 
+import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import top.misec.applemonitor.config.AppCfg;
 import top.misec.applemonitor.config.CfgSingleton;
 import top.misec.applemonitor.job.AppleMonitor;
-import top.misec.applemonitor.push.impl.BarkPush;
+
 
 @Slf4j
 class AppleMonitorApplicationTest {
@@ -20,20 +20,23 @@ class AppleMonitorApplicationTest {
     void pushTest() {
         String jpCfg = "config-jp.json";
         AppCfg config = getAppCfg(jpCfg);
-
-        BarkPush.push("test", config.getPushConfig().getBarkPushUrl(), config.getPushConfig().getBarkPushToken());
-
+        new AppleMonitor().monitor();
     }
 
     @Test
     void monitorTest() {
         String jpCfg = "config-jp.json";
         AppCfg config = getAppCfg(jpCfg);
-
         log.info("config: {}", config);
+        new AppleMonitor().monitor();
+    }
 
-        AppleMonitor appleMonitor = new AppleMonitor();
-        appleMonitor.monitor();
+    @Test
+    void monitorTestCN() {
+        String jpCfg = "config.json";
+        AppCfg config = getAppCfg(jpCfg);
+        log.info("config: {}", config);
+        new AppleMonitor().monitor();
     }
 
 
