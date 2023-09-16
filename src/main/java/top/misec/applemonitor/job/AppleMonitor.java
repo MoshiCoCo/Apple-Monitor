@@ -37,7 +37,7 @@ public class AppleMonitor {
         try {
             for (DeviceItem deviceItem : deviceItemList) {
                 doMonitor(deviceItem);
-                Thread.sleep(2500);
+                Thread.sleep(1500);
             }
         } catch (Exception e) {
             log.error("AppleMonitor Error", e);

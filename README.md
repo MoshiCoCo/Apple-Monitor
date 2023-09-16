@@ -38,7 +38,7 @@ regions.
 1. 下载构建的产物压缩包 [releases版本](https://github.com/MoshiCoCo/Apple-Monitor/releases)
 2. 解压压缩包，文件内会包含一个可执行的jar和一份config.json配置文件，以及说明文档若干。
 3. 编辑config.json配置你需要监控的产品型号以及地区即可，可支持cron表达式自定义监控频率。
-4. 执行命令 `java -jar apple-monitor-v0.0.1.jar`
+4. 执行命令 `java -jar apple-monitor-v0.0.9.jar`
 
 **配置文件参数解释**
 
@@ -72,8 +72,8 @@ regions.
         ],
         "pushConfigs": [
           {
-            "barkPushUrl": "",
-            "barkPushToken": "",
+            "barkPushUrl": "https://api.day.app/push",
+            "barkPushToken": "你的token",
             "feishuBotWebhooks": "",
             "feishuBotSecret": ""
           }

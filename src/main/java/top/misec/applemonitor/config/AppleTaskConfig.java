@@ -5,6 +5,9 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import top.misec.applemonitor.push.impl.BarkPush;
+import top.misec.applemonitor.push.impl.FeiShuBotPush;
+import top.misec.applemonitor.push.pojo.feishu.FeiShuPushDTO;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,6 +48,20 @@ public class AppleTaskConfig {
                 k.setStoreWhiteList(Collections.emptyList());
                 log.info("{},需要监控的门店为空，默认监控您附近的所有门店", k.getDeviceCode());
             }
+             k.getPushConfigs().forEach(push -> {
+                 log.info("机器人开始干活啦");
+                 String content = StrUtil.format("您的机器人开始监控{}附近的Apple直营店啦", location);
+
+                 if (StrUtil.isAllNotEmpty(push.getBarkPushUrl(), push.getBarkPushToken())) {
+                     BarkPush.push(content, push.getBarkPushUrl(), push.getBarkPushToken());
+                 }
+                 if (StrUtil.isAllNotEmpty(push.getFeishuBotSecret(), push.getFeishuBotWebhooks())) {
+                     FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
+                             .text(content).secret(push.getFeishuBotSecret())
+                             .botWebHooks(push.getFeishuBotWebhooks())
+                             .build());
+                 }
+             });
         });
 
 
