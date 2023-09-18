@@ -22,7 +22,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.19</version>
+            <version>5.8.22</version>
         </dependency>
 
         <dependency>
@@ -69,6 +69,12 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.4.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>top.misec</groupId>
+            <artifactId>bark-java-sdk</artifactId>
+            <version>0.0.3</version>
         </dependency>
 
     </dependencies>

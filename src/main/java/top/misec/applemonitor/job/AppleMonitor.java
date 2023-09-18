@@ -10,9 +10,11 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import top.misec.applemonitor.config.*;
-import top.misec.applemonitor.push.impl.BarkPush;
 import top.misec.applemonitor.push.impl.FeiShuBotPush;
 import top.misec.applemonitor.push.pojo.feishu.FeiShuPushDTO;
+import top.misec.bark.BarkPush;
+import top.misec.bark.enums.SoundEnum;
+import top.misec.bark.pojo.PushDetails;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,9 +32,7 @@ public class AppleMonitor {
     public void monitor() {
 
         List<DeviceItem> deviceItemList = CONFIG.getAppleTaskConfig().getDeviceCodeList();
-
         //监视机型型号
-
 
         try {
             for (DeviceItem deviceItem : deviceItemList) {
@@ -50,7 +50,18 @@ public class AppleMonitor {
         pushConfigs.forEach(push -> {
 
             if (StrUtil.isAllNotEmpty(push.getBarkPushUrl(), push.getBarkPushToken())) {
-                BarkPush.push(content, push.getBarkPushUrl(), push.getBarkPushToken());
+                BarkPush barkPush= BarkPush.builder()
+                        .pushUrl(push.getBarkPushUrl())
+                        .deviceKey(push.getBarkPushToken())
+                        .build();
+                PushDetails pushDetails= PushDetails.builder()
+                        .title("苹果商店监控")
+                        .body(content)
+                        .category("苹果商店监控")
+                        .group("Apple Monitor")
+                        .sound(SoundEnum.GLASS.getSoundName())
+                        .build();
+                barkPush.simpleWithResp(pushDetails);
             }
             if (StrUtil.isAllNotEmpty(push.getFeishuBotSecret(), push.getFeishuBotWebhooks())) {
 

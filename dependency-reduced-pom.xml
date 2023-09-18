@@ -4,7 +4,7 @@
   <groupId>top.misec</groupId>
   <artifactId>apple-monitor</artifactId>
   <name>apple-monitor</name>
-  <version>0.0.6</version>
+  <version>0.0.9</version>
   <description>apple-monitor</description>
   <build>
     <plugins>
