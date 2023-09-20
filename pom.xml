@@ -27,7 +27,7 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.15</version>
+            <version>1.16.0</version>
         </dependency>
 
         <dependency>
@@ -39,21 +39,21 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>1.18.28</version>
         </dependency>
 
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.0</version>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>io.github.itning</groupId>
             <artifactId>guava-retrying3</artifactId>
-            <version>3.0.2</version>
+            <version>3.0.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.guava</groupId>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.5</version>
+            <version>1.4.11</version>
         </dependency>
 
         <dependency>
