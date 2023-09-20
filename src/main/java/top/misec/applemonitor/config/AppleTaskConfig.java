@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import top.misec.applemonitor.push.impl.FeiShuBotPush;
 import top.misec.applemonitor.push.pojo.feishu.FeiShuPushDTO;
 import top.misec.bark.BarkPush;
+import top.misec.bark.enums.SoundEnum;
 
 import java.util.Collections;
 import java.util.List;
@@ -48,21 +49,23 @@ public class AppleTaskConfig {
                 log.info("{},需要监控的门店为空，默认监控您附近的所有门店", k.getDeviceCode());
             }
             k.getPushConfigs().forEach(push -> {
-                boolean flag = false;
-                if (flag) {
-                    log.info("机器人开始干活啦");
-                    String content = StrUtil.format("您的机器人开始监控{}附近的Apple直营店啦", location);
 
-                    if (StrUtil.isAllNotEmpty(push.getBarkPushUrl(), push.getBarkPushToken())) {
-                        BarkPush pusher =BarkPush.builder().pushUrl(push.getBarkPushUrl()).deviceKey(push.getBarkPushToken()).build();
-                        pusher.simpleWithResp(content);
-                    }
-                    if (StrUtil.isAllNotEmpty(push.getFeishuBotSecret(), push.getFeishuBotWebhooks())) {
-                        FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
-                                .text(content).secret(push.getFeishuBotSecret())
-                                .botWebHooks(push.getFeishuBotWebhooks())
-                                .build());
-                    }
+                if (StrUtil.isEmpty(push.getBarkPushSound())) {
+                    push.setBarkPushSound(SoundEnum.GLASS.getSoundName());
+                }
+
+                log.info("机器人开始干活啦");
+                String content = StrUtil.format("您的机器人开始监控{}附近的Apple直营店啦", location);
+
+                if (StrUtil.isAllNotEmpty(push.getBarkPushUrl(), push.getBarkPushToken())) {
+                    BarkPush pusher = new BarkPush(push.getBarkPushUrl(), push.getBarkPushToken());
+                    pusher.simpleWithResp(content);
+                }
+                if (StrUtil.isAllNotEmpty(push.getFeishuBotSecret(), push.getFeishuBotWebhooks())) {
+                    FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
+                            .text(content).secret(push.getFeishuBotSecret())
+                            .botWebHooks(push.getFeishuBotWebhooks())
+                            .build());
                 }
 
             });

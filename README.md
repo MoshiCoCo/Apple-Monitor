@@ -53,6 +53,7 @@ regions.
 | pushConfigs       | Object List   推送配置                                                |
 | barkPushUrl       | bark推送服务器地址,默认为  https://api.day.app/push                         |
 | barkPushToken     | bark token    [获取BarkToken请参考](./docs/use-bark.md)                |
+| barkPushSound     | bark 推送铃声                                                         |
 | feishuBotWebhooks | 飞书机器人webhook地址                                                    |
 | feishuBotSecret   | 飞书机器人secret                                                       |
 
@@ -74,6 +75,7 @@ regions.
           {
             "barkPushUrl": "https://api.day.app/push",
             "barkPushToken": "你的token",
+            "barkPushSound": "multiwayinvitation.caf",
             "feishuBotWebhooks": "",
             "feishuBotSecret": ""
           }

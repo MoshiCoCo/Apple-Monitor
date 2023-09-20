@@ -13,6 +13,7 @@
           {
             "barkPushUrl": "",
             "barkPushToken": "",
+            "barkPushSound": "multiwayinvitation.caf",
             "feishuBotWebhooks": "",
             "feishuBotSecret": ""
           }
@@ -27,6 +28,7 @@
           {
             "barkPushUrl": "",
             "barkPushToken": "",
+            "barkPushSound": "glass.caf",
             "feishuBotWebhooks": "",
             "feishuBotSecret": ""
           }

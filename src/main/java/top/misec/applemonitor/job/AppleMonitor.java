@@ -50,16 +50,13 @@ public class AppleMonitor {
         pushConfigs.forEach(push -> {
 
             if (StrUtil.isAllNotEmpty(push.getBarkPushUrl(), push.getBarkPushToken())) {
-                BarkPush barkPush= BarkPush.builder()
-                        .pushUrl(push.getBarkPushUrl())
-                        .deviceKey(push.getBarkPushToken())
-                        .build();
+                BarkPush barkPush = new BarkPush(push.getBarkPushUrl(), push.getBarkPushToken());
                 PushDetails pushDetails= PushDetails.builder()
                         .title("苹果商店监控")
                         .body(content)
                         .category("苹果商店监控")
                         .group("Apple Monitor")
-                        .sound(SoundEnum.GLASS.getSoundName())
+                        .sound(StrUtil.isEmpty(push.getBarkPushSound()) ? SoundEnum.GLASS.getSoundName() : push.getBarkPushSound())
                         .build();
                 barkPush.simpleWithResp(pushDetails);
             }

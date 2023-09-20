@@ -26,6 +26,8 @@ public class PushConfig {
      */
     public String barkPushToken;
 
+    public String barkPushSound;
+
     public String feishuBotWebhooks;
     public String feishuBotSecret;
 

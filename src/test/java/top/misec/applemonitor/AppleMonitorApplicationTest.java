@@ -34,12 +34,11 @@ class AppleMonitorApplicationTest {
                 .body("123")
                 .category("苹果商店监控")
                 .group("Apple Monitor")
-                .sound(SoundEnum.GLASS.getSoundName())
+                .sound(SoundEnum.MULTIWAYINVITATION.getSoundName())
                 .build();
         barkPush.simpleWithResp(pushDetails);
         log.info("config: {}", config);
     }
-
     @Test
     void pushTest() {
         String jpCfg = "config-jp.json";
