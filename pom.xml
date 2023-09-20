@@ -5,7 +5,7 @@
 
     <groupId>top.misec</groupId>
     <artifactId>apple-monitor</artifactId>
-    <version>0.0.9</version>
+    <version>0.1.0</version>
     <name>apple-monitor</name>
     <description>apple-monitor</description>
 
@@ -18,7 +18,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
