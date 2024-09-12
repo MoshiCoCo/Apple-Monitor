@@ -24,7 +24,7 @@ class AppleMonitorApplicationTest {
         String jpCfg = "config-test.json";
         AppCfg config = getAppCfg(jpCfg);
 
-
+        System.out.println(config);
 
         PushConfig pushConfig = config.getAppleTaskConfig().getDeviceCodeList().get(0).getPushConfigs().get(0);
 
@@ -37,7 +37,7 @@ class AppleMonitorApplicationTest {
                 .sound(SoundEnum.MULTIWAYINVITATION.getSoundName())
                 .build();
         barkPush.simpleWithResp(pushDetails);
-        log.info("config: {}", config);
+        log.info("read config : {}", config);
     }
     @Test
     void pushTest() {
@@ -47,10 +47,18 @@ class AppleMonitorApplicationTest {
     }
 
     @Test
+    void monitorLocal() {
+        String jpCfg = "config-test.json";
+        AppCfg config = getAppCfg(jpCfg);
+        log.info("monitor local config: {}", config);
+        new AppleMonitor().monitor();
+    }
+
+    @Test
     void monitorTest() {
         String jpCfg = "config-jp.json";
         AppCfg config = getAppCfg(jpCfg);
-        log.info("config: {}", config);
+        log.info("config jp: {}", config);
         new AppleMonitor().monitor();
     }
 
@@ -66,6 +74,5 @@ class AppleMonitorApplicationTest {
     private AppCfg getAppCfg(String fileName) {
         return CfgSingleton.getTestInstance(fileName).config;
     }
-
 
 }
