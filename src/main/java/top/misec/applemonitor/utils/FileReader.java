@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 /**
  * @author moshi
  */
-
 @Slf4j
 public class FileReader {
     /**
@@ -31,7 +30,7 @@ public class FileReader {
         } catch (FileNotFoundException e) {
             log.debug("file not found", e);
         } catch (IOException e) {
-            log.warn("", e);
+            log.warn("file read exception", e);
         }
         return fileContentStr;
     }
