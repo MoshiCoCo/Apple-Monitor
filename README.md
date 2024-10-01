@@ -48,7 +48,7 @@ regions.
 | country           | 需要监控的国家，目前仅支持"CN"，"JP" ，CN-MACAO，CN-HK，CN-TW                      |
 | location          | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区                      |
 | deviceCodeList    | Object List                                                       |
-| deviceCode        | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)               |
+| deviceCode        | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)，更多型号可参考[the apple wiki](https://theapplewiki.com/wiki/Models#iPhone)            |
 | storeWhiteList    | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有                       |
 | pushConfigs       | Object List   推送配置                                                |
 | barkPushUrl       | bark推送服务器地址,默认为  https://api.day.app/push                         |
