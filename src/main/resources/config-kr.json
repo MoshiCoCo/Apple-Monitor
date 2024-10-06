@@ -1,0 +1,41 @@
+{
+  "appleTaskConfig": {
+    "cronExpressions": "*/12 * * * * ?",
+    "country": "KR",
+    "location": "01000",
+    "deviceCodeList": [
+      {
+        "deviceCode": "MYX53KH/A",
+        "storeWhiteList": [
+          "여의도",
+          "가로수길"
+        ],
+        "pushConfigs": [
+          {
+            "barkPushUrl": "",
+            "barkPushToken": "",
+            "barkPushSound": "glass.caf",
+            "feishuBotWebhooks": "",
+            "feishuBotSecret": ""
+          }
+        ]
+      },
+      {
+        "deviceCode": "MYX73KH/A",
+        "storeWhiteList": [
+          "여의도",
+          "가로수길"
+        ],
+        "pushConfigs": [
+          {
+            "barkPushUrl": "",
+            "barkPushToken": "",
+            "barkPushSound": "multiwayinvitation.caf",
+            "feishuBotWebhooks": "",
+            "feishuBotSecret": ""
+          }
+        ]
+      }
+    ]
+  }
+}

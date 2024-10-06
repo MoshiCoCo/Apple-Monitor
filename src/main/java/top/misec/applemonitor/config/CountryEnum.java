@@ -17,6 +17,7 @@ public enum CountryEnum {
     CN_HK("CN-HK", "https://www.apple.com/hk"),
     CN_TAIWAN("CN-TW", "https://www.apple.com/tw"),
     JP("JP", "https://www.apple.com/jp"),
+    KR("KR", "https://www.apple.com/kr"),
 
     ;
 

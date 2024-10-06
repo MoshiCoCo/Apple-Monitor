@@ -24,7 +24,7 @@
 
 一个用 Java 实现的 Apple 线下商店库存监控工具,支持Bark,飞书，Lark机器人等消息推送方式。
 
-目前已经支持监控中国大陆，中国香港，中国澳门，中国台湾，日本等地区的苹果商店。
+目前已经支持监控中国大陆，中国香港，中国澳门，中国台湾，日本，韩国等地区的苹果商店。
 
 Currently, it supports monitoring Apple Stores in mainland China, Hong Kong, Macau, China Taiwan, Japan and other
 regions.
@@ -100,12 +100,19 @@ regions.
 }
 ```
 
-注：
+注🇯🇵：
 如果需要监控日本地区的情况，请将country设置为JP，
 location设置为你所在的区域邮编，例如：197-0804，deviceCodes设置为你需要监控的产品型号（日本版本型号），storeWhiteList设置为你需要监控的商店，例如
 新宿 ，不填则默认监控所有。
 
 日本地域プロファイル参照例 [config-jp.json](./src/main/resources/config-jp.json)
+
+注🇰🇷：
+如果需要监控韩国地区的情况，请将country设置为KR，
+location设置为你所在的区域邮编，例如：01000，deviceCodes设置为你需要监控的产品型号（韩国版本型号），storeWhiteList设置为你需要监控的商店，例如
+여의도 ，不填则默认监控所有。
+
+韩国地区设置参考[config-kr.json](./src/main/resources/config-kr.json)
 
 *如何使用Bark请参考 [Bark使用文档](./docs/use-bark.md)*
 
