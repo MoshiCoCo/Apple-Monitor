@@ -29,7 +29,7 @@ class AppleMonitorApplicationTest {
         PushConfig pushConfig = config.getAppleTaskConfig().getDeviceCodeList().get(0).getPushConfigs().get(0);
 
         BarkPush barkPush = new BarkPush(pushConfig.getBarkPushUrl(), pushConfig.getBarkPushToken());
-        PushDetails pushDetails= PushDetails.builder()
+        PushDetails pushDetails = PushDetails.builder()
                 .title("苹果商店监控")
                 .body("123")
                 .category("苹果商店监控")
@@ -39,6 +39,7 @@ class AppleMonitorApplicationTest {
         barkPush.simpleWithResp(pushDetails);
         log.info("read config : {}", config);
     }
+
     @Test
     void pushTest() {
         String jpCfg = "config-jp.json";
@@ -64,8 +65,16 @@ class AppleMonitorApplicationTest {
 
     @Test
     void monitorTestCN() {
-        String jpCfg = "config.json";
-        AppCfg config = getAppCfg(jpCfg);
+        String cnCfg = "config.json";
+        AppCfg config = getAppCfg(cnCfg);
+        log.info("config: {}", config);
+        new AppleMonitor().monitor();
+    }
+
+    @Test
+    void monitorTestKR() {
+        String krCfg = "config-kr.json";
+        AppCfg config = getAppCfg(krCfg);
         log.info("config: {}", config);
         new AppleMonitor().monitor();
     }
