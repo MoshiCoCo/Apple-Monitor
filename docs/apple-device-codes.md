@@ -68,9 +68,9 @@
 | iPhone 16 Pro Desert  | MYMX3J/A | MYN23J/A | MYN63J/A | MYNA3J/A |
 | iPhone 16 Pro Natural | MYMY3J/A | MYN33J/A | MYN73J/A | MYNC3J/A |
 
-| 型号                           | 型号代码     |
-|------------------------------|----------|
-| iPhone 14 Pro 256GB スペースブラック | MQ0Q3J/A |
+| 型号                     | 256GB    |
+|------------------------|----------|
+| iPhone 14 Pro スペースブラック | MQ0Q3J/A |
 
 # 常用型号列表（韩国）
 
