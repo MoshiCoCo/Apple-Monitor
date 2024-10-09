@@ -14,7 +14,7 @@ public enum CountryEnum {
      */
     CN("CN", "https://www.apple.com.cn"),
     CN_HK("CN-HK", "https://www.apple.com/hk"),
-    CN_MO("CN-MACAO", "https://www.apple.com/mo"),
+    CN_MO("CN-MO", "https://www.apple.com/mo"),
     CN_TW("CN-TW", "https://www.apple.com/tw"),
     JP("JP", "https://www.apple.com/jp"),
     KR("KR", "https://www.apple.com/kr"),
