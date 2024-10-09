@@ -2,7 +2,6 @@ package top.misec.applemonitor.push.pojo.feishu;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 /**
  * Bark推送DTO
