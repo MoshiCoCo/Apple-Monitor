@@ -24,9 +24,11 @@
 
 一个用 Java 实现的 Apple 线下商店库存监控工具,支持Bark,飞书，Lark机器人等消息推送方式。
 
-目前已经支持监控中国大陆，中国香港，中国澳门，中国台湾，日本，韩国等地区的苹果商店。
+目前已经支持监控中国大陆，中国香港，中国澳门，中国台湾，日本，韩国，新加坡，马来西亚，澳大利亚，英国，加拿大，美国等地区的苹果商店。
 
-Currently, it supports monitoring Apple Stores in mainland China, Hong Kong, Macau, China Taiwan, Japan, Korea and other
+CN, CN_HK, CN_MO, CN_TW, JP, KR, SG, MY, AU, UK, CA, US
+Currently, it supports monitoring Apple Stores in mainland China, Hong Kong, Macau, China Taiwan, Japan, Korea,
+Singapore, Malaysia, Australia, United Kingdom, Canada, United States and other
 regions.
 
 ## 使用效果
@@ -45,7 +47,7 @@ regions.
 | 值                 | 含义                                                                                                                       |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------|
 | cronExpressions   | 执行的cron表达式,建议执行时间间隔设置为 （监控的设备型号数*3）秒，如果你不会写corn表达式，建议使用程序输出的推荐表达式                                                        |
-| country           | 需要监控的国家，目前仅支持CN，JP，KR，CN-MACAO，CN-HK，CN-TW                                                                               |
+| country           | Supported: CN, CN_HK, CN_MO, CN_TW, JP, KR, SG, MY, AU, UK, CA, US                                                       |
 | location          | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区（其他地区请用邮政编码）                                                                 |
 | deviceCodeList    | Object List                                                                                                              |
 | deviceCode        | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)，更多型号可参考[the apple wiki](https://theapplewiki.com/wiki/Models#iPhone) |

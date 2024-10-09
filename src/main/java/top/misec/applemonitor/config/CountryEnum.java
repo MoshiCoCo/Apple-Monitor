@@ -13,11 +13,17 @@ public enum CountryEnum {
      * Country，WebsiteURL
      */
     CN("CN", "https://www.apple.com.cn"),
-    CN_MACAO("CN-MACAO", "https://www.apple.com/mo"),
     CN_HK("CN-HK", "https://www.apple.com/hk"),
-    CN_TAIWAN("CN-TW", "https://www.apple.com/tw"),
+    CN_MO("CN-MACAO", "https://www.apple.com/mo"),
+    CN_TW("CN-TW", "https://www.apple.com/tw"),
     JP("JP", "https://www.apple.com/jp"),
     KR("KR", "https://www.apple.com/kr"),
+    SG("SG", "https://www.apple.com/sg"),
+    MY("MY", "https://www.apple.com/my"),
+    AU("AU", "https://www.apple.com/au"),
+    UK("UK", "https://www.apple.com/uk"),
+    CA("CA", "https://www.apple.com/ca"),
+    US("US", "https://www.apple.com"),
 
     ;
 
