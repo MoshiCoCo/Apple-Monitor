@@ -26,15 +26,16 @@ public class FeiShuBotPush {
 
     public static void pushTextMessage(FeiShuPushDTO feiShuPushDTO) {
         long timestamp = System.currentTimeMillis() / 1000;
-        HttpResponse httpResponse = HttpRequest.post(feiShuPushDTO.getBotWebHooks())
+        try (HttpResponse httpResponse = HttpRequest.post(feiShuPushDTO.getBotWebHooks())
                 .body(JSONObject.toJSONString(FeiShuPushReq.builder()
                         .content(TextContent.builder().text(feiShuPushDTO.getText()).build())
                         .timestamp(timestamp)
                         .msgType("text")
                         .sign(FeiShuUtils.genSign(feiShuPushDTO.getSecret(), timestamp))
                         .build()))
-                .execute();
-        log.info("飞书机器人推送状态:{}", httpResponse.getStatus());
-        log.info(httpResponse.body());
+                .execute()) {
+            log.info("飞书机器人推送状态:{}", httpResponse.getStatus());
+            log.info(httpResponse.body());
+        }
     }
 }

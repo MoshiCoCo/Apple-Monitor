@@ -86,13 +86,15 @@ public class AppleMonitor {
         String url = baseCountryUrl + "/shop/fulfillment-messages?" + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
 
         try {
-            HttpResponse httpResponse = HttpRequest.get(url).header(headers).execute();
-            if (!httpResponse.isOk()) {
-                log.info("请求过于频繁，请调整cronExpressions，建议您参考推荐的cron表达式");
-                return;
-            }
+            JSONObject responseJsonObject;
+            try (HttpResponse httpResponse = HttpRequest.get(url).header(headers).execute()) {
+                if (!httpResponse.isOk()) {
+                    log.info("请求过于频繁，请调整cronExpressions，建议您参考推荐的cron表达式");
+                    return;
+                }
 
-            JSONObject responseJsonObject = JSONObject.parseObject(httpResponse.body());
+                responseJsonObject = JSONObject.parseObject(httpResponse.body());
+            }
 
             JSONObject pickupMessage = responseJsonObject.getJSONObject("body").getJSONObject("content").getJSONObject("pickupMessage");
 
