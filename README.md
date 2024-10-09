@@ -47,7 +47,7 @@ regions.
 | 值                 | 含义                                                                                                                       |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------|
 | cronExpressions   | 执行的cron表达式,建议执行时间间隔设置为 （监控的设备型号数*3）秒，如果你不会写corn表达式，建议使用程序输出的推荐表达式                                                        |
-| country           | Supported: CN, CN_HK, CN_MO, CN_TW, JP, KR, SG, MY, AU, UK, CA, US                                                       |
+| country           | Supported: CN, CN-HK, CN-MO, CN-TW, JP, KR, SG, MY, AU, UK, CA, US                                                       |
 | location          | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区（其他地区请用邮政编码）                                                                 |
 | deviceCodeList    | Object List                                                                                                              |
 | deviceCode        | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)，更多型号可参考[the apple wiki](https://theapplewiki.com/wiki/Models#iPhone) |
