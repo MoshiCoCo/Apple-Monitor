@@ -31,6 +31,23 @@ Currently, it supports monitoring Apple Stores in mainland China, Hong Kong, Mac
 Singapore, Malaysia, Australia, United Kingdom, Canada, United States and other
 regions.
 
+## 支持国家
+
+|  国家  | Country Code | 支持情况 |
+|:----:|:------------:|:----:|
+| 中国大陆 |      CN      |  ✅   |
+| 中国香港 |    CN_HK     |  ✅   |
+| 中国澳门 |    CN_MO     |  ✅   |
+| 中国台湾 |    CN_TW     |  ✅   |
+|  日本  |      JP      |  ✅   |
+|  韩国  |      KR      |  ✅   |
+| 新加坡  |      SG      |  ✅   |
+| 马来西亚 |      MY      |  ✅   |
+| 澳大利亚 |      AU      |  ✅   |
+|  英国  |      UK      |  ✅   |
+| 加拿大  |      CA      |  ✅   |
+|  美国  |      US      |  ✅   |
+
 ## 使用效果
 
 ![效果图](docs/images/view.png)
@@ -140,7 +157,14 @@ location设置为你所在的区域邮编，例如：01000，deviceCodes设置�
 
 ## 致谢
 
-感谢 JetBrains 对本项目的支持。
+**感谢 [@realJustinLee](https://github.com/realJustinLee) 同学对其他国家地区适配所作出的出色工作。**
+
+**Thanks to [@realJustinLee](https://github.com/realJustinLee) for his excellent work in adapting to other countries and
+regions.**
+
+**感谢 JetBrains 对本项目的支持。**
+
+**Thanks to JetBrains for supporting this project.**
 
 [![JetBrains](docs/images/jetbrains.svg)](https://www.jetbrains.com/?from=Apple-Monitor)
 
