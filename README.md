@@ -24,9 +24,11 @@
 
 一个用 Java 实现的 Apple 线下商店库存监控工具,支持Bark,飞书，Lark机器人等消息推送方式。
 
-目前已经支持监控中国大陆，中国香港，中国澳门，中国台湾，日本，韩国等地区的苹果商店。
+目前已经支持监控中国大陆，中国香港，中国澳门，中国台湾，日本，韩国，新加坡，马来西亚，澳大利亚，英国，加拿大，美国等地区的苹果商店。
 
-Currently, it supports monitoring Apple Stores in mainland China, Hong Kong, Macau, China Taiwan, Japan, Korea and other
+CN, CN_HK, CN_MO, CN_TW, JP, KR, SG, MY, AU, UK, CA, US
+Currently, it supports monitoring Apple Stores in mainland China, Hong Kong, Macau, China Taiwan, Japan, Korea,
+Singapore, Malaysia, Australia, United Kingdom, Canada, United States and other
 regions.
 
 ## 使用效果
@@ -38,15 +40,15 @@ regions.
 1. 下载构建的产物压缩包 [releases版本](https://github.com/MoshiCoCo/Apple-Monitor/releases)
 2. 解压压缩包，文件内会包含一个可执行的jar和一份config.json配置文件，以及说明文档若干。
 3. 编辑config.json配置你需要监控的产品型号以及地区即可，可支持cron表达式自定义监控频率。
-4. 执行命令 `java -jar apple-monitor-v0.0.9.jar`
+4. 执行命令 `java -jar apple-monitor-v*.jar`
 
 **配置文件参数解释**
 
 | 值                 | 含义                                                                                                                       |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------|
 | cronExpressions   | 执行的cron表达式,建议执行时间间隔设置为 （监控的设备型号数*3）秒，如果你不会写corn表达式，建议使用程序输出的推荐表达式                                                        |
-| country           | 需要监控的国家，目前仅支持"CN"，"JP" ，CN-MACAO，CN-HK，CN-TW                                                                             |
-| location          | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区                                                                             |
+| country           | Supported: CN, CN-HK, CN-MO, CN-TW, JP, KR, SG, MY, AU, UK, CA, US                                                       |
+| location          | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区（其他地区请用邮政编码）                                                                 |
 | deviceCodeList    | Object List                                                                                                              |
 | deviceCode        | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)，更多型号可参考[the apple wiki](https://theapplewiki.com/wiki/Models#iPhone) |
 | storeWhiteList    | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有                                                                              |
