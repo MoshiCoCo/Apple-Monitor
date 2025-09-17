@@ -20,6 +20,8 @@
 - [License](#license)
 - [Stargazers over time](#stargazers-over-time)
 
+## iPhone 17 系列工作正常
+
 ## AppleMonitor
 
 一个用 Java 实现的 Apple 线下商店库存监控工具,支持Bark,飞书，Lark机器人等消息推送方式。
