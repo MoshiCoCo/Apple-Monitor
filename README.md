@@ -63,20 +63,20 @@ regions.
 
 **配置文件参数解释**
 
-| 值                 | 含义                                                                                                                       |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------|
-| cronExpressions   | 执行的cron表达式,建议执行时间间隔设置为 （监控的设备型号数*3）秒，如果你不会写corn表达式，建议使用程序输出的推荐表达式                                                        |
-| country           | Supported: CN, CN-HK, CN-MO, CN-TW, JP, KR, SG, MY, AU, UK, CA, US                                                       |
-| location          | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区（其他地区请用邮政编码）                                                                 |
-| deviceCodeList    | Object List                                                                                                              |
-| deviceCode        | 需要监控的产品代码    [产品型号列表](./docs/apple-device-codes.md)，更多型号可参考[the apple wiki](https://theapplewiki.com/wiki/Models#iPhone) |
-| storeWhiteList    | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有                                                                              |
-| pushConfigs       | Object List   推送配置                                                                                                       |
-| barkPushUrl       | bark推送服务器地址,默认为  https://api.day.app/push                                                                                |
-| barkPushToken     | bark token    [获取BarkToken请参考](./docs/use-bark.md)                                                                       |
-| barkPushSound     | bark 推送铃声                                                                                                                |
-| feishuBotWebhooks | 飞书机器人webhook地址                                                                                                           |
-| feishuBotSecret   | 飞书机器人secret                                                                                                              |
+| 值                 | 含义                                                                                  |
+|-------------------|-------------------------------------------------------------------------------------|
+| cronExpressions   | 执行的cron表达式,建议执行时间间隔设置为 （监控的设备型号数*3）秒，如果你不会写corn表达式，建议使用程序输出的推荐表达式                   |
+| country           | Supported: CN, CN-HK, CN-MO, CN-TW, JP, KR, SG, MY, AU, UK, CA, US                  |
+| location          | 你所在的区域，要用苹果官网风格的地址，例如 广东 深圳 南山区 或者 重庆 重庆 XX区（其他地区请用邮政编码）                            |
+| deviceCodeList    | Object List                                                                         |
+| deviceCode        | 需要监控的产品代码   [产品型号代码可参考 the apple wiki](https://theapplewiki.com/wiki/Models#iPhone) |
+| storeWhiteList    | 商店白名单，一个区域可能有多个商店，仅监控白名单中的商店，模糊匹配，不填则默认监控所有                                         |
+| pushConfigs       | Object List   推送配置                                                                  |
+| barkPushUrl       | bark推送服务器地址,默认为  https://api.day.app/push                                           |
+| barkPushToken     | bark token    [获取BarkToken请参考](./docs/use-bark.md)                                  |
+| barkPushSound     | bark 推送铃声                                                                           |
+| feishuBotWebhooks | 飞书机器人webhook地址                                                                      |
+| feishuBotSecret   | 飞书机器人secret                                                                         |
 
 **配置文件示例**
 
