@@ -83,7 +83,7 @@ public class AppleMonitor {
 
         Map<String, List<String>> headers = buildHeaders(baseCountryUrl, deviceItem.getDeviceCode());
 
-        String url = baseCountryUrl + "/shop/fulfillment-messages?" + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
+        String url = baseCountryUrl + "/shop/retail/pickup-message?" + URLUtil.buildQuery(queryMap, CharsetUtil.CHARSET_UTF_8);
 
         try {
             JSONObject responseJsonObject;
@@ -96,13 +96,20 @@ public class AppleMonitor {
                 responseJsonObject = JSONObject.parseObject(httpResponse.body());
             }
 
-            JSONObject pickupMessage = responseJsonObject.getJSONObject("body").getJSONObject("content").getJSONObject("pickupMessage");
+            JSONObject responseBody = responseJsonObject.getJSONObject("body");
+            JSONArray stores = responseBody.getJSONArray("stores");
 
-            JSONArray stores = pickupMessage.getJSONArray("stores");
+            // Compatibility with the legacy fulfillment-messages response.
+            if (stores == null && responseBody.getJSONObject("content") != null) {
+                JSONObject pickupMessage = responseBody.getJSONObject("content").getJSONObject("pickupMessage");
+                if (pickupMessage != null) {
+                    stores = pickupMessage.getJSONArray("stores");
+                }
+            }
 
             if (stores == null) {
-                log.info("您可能填错产品代码了，目前仅支持监控中国和日本地区的产品，注意不同国家的机型型号不同，下面是是错误信息");
-                log.debug(pickupMessage.toString());
+                log.warn("Apple 接口响应中没有门店信息，请检查产品代码和地区配置");
+                log.debug("Apple 接口响应 body：{}", responseBody);
                 return;
             }
 
@@ -173,12 +180,13 @@ public class AppleMonitor {
      */
     private String buildPickupInformation(JSONObject retailStore) {
         String distanceWithUnit = retailStore.getString("distanceWithUnit");
-        String twoLineAddress = retailStore.getJSONObject("address").getString("twoLineAddress");
+        JSONObject address = retailStore.getJSONObject("address");
+        String twoLineAddress = address.getString("twoLineAddress");
         if (StrUtil.isEmpty(twoLineAddress)) {
-            twoLineAddress = "暂无取货地址";
+            twoLineAddress = StrUtil.blankToDefault(address.getString("street"), "暂无取货地址");
         }
 
-        String daytimePhone = retailStore.getJSONObject("address").getString("daytimePhone");
+        String daytimePhone = address.getString("daytimePhone");
         if (StrUtil.isEmpty(daytimePhone)) {
             daytimePhone = "暂无联系电话";
         }
@@ -203,7 +211,7 @@ public class AppleMonitor {
     private Map<String, List<String>> buildHeaders(String baseCountryUrl, String productCode) {
 
         ArrayList<String> referer = new ArrayList<>();
-        referer.add(baseCountryUrl + "/shop/buy-iphone/iphone-14-pro/" + productCode);
+        referer.add(baseCountryUrl + "/shop/buy-iphone");
 
         Map<String, List<String>> headers = new HashMap<>(10);
         headers.put(Header.REFERER.getValue(), referer);
