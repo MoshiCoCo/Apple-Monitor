@@ -97,6 +97,12 @@ public class AppleMonitor {
             }
 
             JSONObject responseBody = responseJsonObject.getJSONObject("body");
+            if (responseBody == null) {
+                log.warn("Apple 接口响应中缺少 body，请稍后重试或检查接口是否发生变化");
+                log.debug("Apple 接口完整响应：{}", responseJsonObject);
+                return;
+            }
+
             JSONArray stores = responseBody.getJSONArray("stores");
 
             // Compatibility with the legacy fulfillment-messages response.
