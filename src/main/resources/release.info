@@ -1,1 +1,21 @@
-1. 发布v.0.1.4版本，支持iPhone17系列，修复推送消息异常
+## 中文
+
+1. 发布 v0.1.5 版本，补充 iPhone18 系列中国大陆机型编码并更新示例配置
+2. 修复飞书机器人未配置签名密钥时静默不推送的问题
+3. 增加 HTTP 全局超时，单个机型或推送渠道异常不再中断整轮监控
+4. 配置缺失或校验不通过时明确报错退出，不再静默挂起
+5. 修复日志文件被两个 appender 重复写入、启动即清空历史日志的问题
+6. 精简打包依赖，fat jar 体积由 11MB 降至 4.9MB，版本号统一收敛到 pom properties
+7. 修复 Dockerfile 产物名与已归档的 GitHub Actions
+8. 适配新版库存查询接口与 JDK 构建，并对苹果接口返回空 body 增加保护 @mgbaozi
+
+## English
+
+1. Release v0.1.5: add the mainland China part numbers for the iPhone 18 family and refresh the sample config
+2. Stop silently skipping Feishu bots that have no signing secret configured
+3. Add a global HTTP timeout, so one failing model or push channel no longer aborts the whole run
+4. Exit with a clear error instead of hanging silently when the config is missing or invalid
+5. Fix two appenders writing the same log file, which wiped the history log on every start
+6. Slim the fat jar from 11MB to 4.9MB and centralize all versions in pom properties
+7. Fix the Dockerfile artifact name and replace the archived GitHub Actions
+8. Adapt to the new inventory API and the JDK build, and guard against a missing Apple response body @mgbaozi
