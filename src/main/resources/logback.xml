@@ -22,15 +22,6 @@
         </encoder>
     </appender>
 
-    <appender name="ROOT" class="ch.qos.logback.core.FileAppender">
-        <File>${LOG_PATH}/apple-monitor.log</File>
-        <append>false</append>
-        <encoder>
-            <pattern>%msg%n%n</pattern>
-            <charset>utf8</charset>
-        </encoder>
-    </appender>
-
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
@@ -42,7 +33,6 @@
 
     <root level="${LOG_LEVEL}">
         <level value="${LOG_LEVEL}"/>
-        <appender-ref ref="ROOT"/>
         <appender-ref ref="HISTORY_LOG"/>
         <appender-ref ref="STDOUT"/>
     </root>
