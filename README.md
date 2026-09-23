@@ -28,7 +28,7 @@
 
 目前已经支持监控中国大陆，中国香港，中国澳门，中国台湾，日本，韩国，新加坡，马来西亚，澳大利亚，英国，加拿大，美国等地区的苹果商店。
 
-CN, CN_HK, CN_MO, CN_TW, JP, KR, SG, MY, AU, UK, CA, US
+CN, CN-HK, CN-MO, CN-TW, JP, KR, SG, MY, AU, UK, CA, US
 Currently, it supports monitoring Apple Stores in mainland China, Hong Kong, Macau, China Taiwan, Japan, Korea,
 Singapore, Malaysia, Australia, United Kingdom, Canada, United States and other
 regions.
@@ -38,9 +38,9 @@ regions.
 |  国家  | Country Code | 支持情况 |
 |:----:|:------------:|:----:|
 | 中国大陆 |      CN      |  ✅   |
-| 中国香港 |    CN_HK     |  ✅   |
-| 中国澳门 |    CN_MO     |  ✅   |
-| 中国台湾 |    CN_TW     |  ✅   |
+| 中国香港 |    CN-HK     |  ✅   |
+| 中国澳门 |    CN-MO     |  ✅   |
+| 中国台湾 |    CN-TW     |  ✅   |
 |  日本  |      JP      |  ✅   |
 |  韩国  |      KR      |  ✅   |
 | 新加坡  |      SG      |  ✅   |

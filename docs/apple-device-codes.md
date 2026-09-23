@@ -1,5 +1,23 @@
 # 常用型号列表（中国大陆）
 
+## iPhone 18 Pro 系列（中国大陆）
+
+| 型号                | 256G      | 512G      | 1TB       | 2TB       |
+|-------------------|-----------|-----------|-----------|-----------|
+| iPhone 18 Pro 黑色  | MJT74CH/A | MJTC4CH/A | MJTG4CH/A | MJTL4CH/A |
+| iPhone 18 Pro 银色  | MJT84CH/A | MJTD4CH/A | MJTH4CH/A | MJTM4CH/A |
+| iPhone 18 Pro 酒红色 | MJT94CH/A | MJTE4CH/A | MJTJ4CH/A | MJTN4CH/A |
+| iPhone 18 Pro 冰川蓝 | MJTA4CH/A | MJTF4CH/A | MJTK4CH/A | MJTP4CH/A |
+
+## iPhone 18 Pro Max 系列（中国大陆）
+
+| 型号                    | 256G      | 512G      | 1TB       | 2TB       |
+|-----------------------|-----------|-----------|-----------|-----------|
+| iPhone 18 Pro Max 黑色  | MJY64CH/A | MJYA4CH/A | MJYF4CH/A | MJYK4CH/A |
+| iPhone 18 Pro Max 银色  | MJY74CH/A | MJYC4CH/A | MJYG4CH/A | MJYL4CH/A |
+| iPhone 18 Pro Max 酒红色 | MJY84CH/A | MJYD4CH/A | MJYH4CH/A | MJYM4CH/A |
+| iPhone 18 Pro Max 冰川蓝 | MJY94CH/A | MJYE4CH/A | MJYJ4CH/A | MJYN4CH/A |
+
 ## iPhone 17 系列（中国大陆）
 
 | 型号               | 128G | 256G      | 512G      | 1TB       |
