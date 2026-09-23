@@ -28,19 +28,27 @@ import java.util.Map;
 public class AppleMonitor {
     private final AppCfg CONFIG = CfgSingleton.getInstance().config;
 
+    private static final long DEVICE_INTERVAL_MS = 1500L;
 
     public void monitor() {
 
         List<DeviceItem> deviceItemList = CONFIG.getAppleTaskConfig().getDeviceCodeList();
         //监视机型型号
 
-        try {
-            for (DeviceItem deviceItem : deviceItemList) {
+        for (DeviceItem deviceItem : deviceItemList) {
+            try {
                 doMonitor(deviceItem);
-                Thread.sleep(1500);
+            } catch (Exception e) {
+                log.error("监控机型 {} 时发生异常，继续处理剩余机型", deviceItem.getDeviceCode(), e);
             }
-        } catch (Exception e) {
-            log.error("AppleMonitor Error", e);
+
+            try {
+                Thread.sleep(DEVICE_INTERVAL_MS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                log.warn("监控线程被中断，本轮剩余机型不再处理");
+                return;
+            }
         }
     }
 
@@ -50,22 +58,29 @@ public class AppleMonitor {
         pushConfigs.forEach(push -> {
 
             if (StrUtil.isAllNotEmpty(push.getBarkPushUrl(), push.getBarkPushToken())) {
-                BarkPush barkPush = new BarkPush(push.getBarkPushUrl(), push.getBarkPushToken());
-                PushDetails pushDetails= PushDetails.builder()
-                        .title("苹果商店监控")
-                        .body(content)
-                        .category("苹果商店监控")
-                        .group("Apple Monitor")
-                        .sound(StrUtil.isEmpty(push.getBarkPushSound()) ? SoundEnum.GLASS.getSoundName() : push.getBarkPushSound())
-                        .build();
-                barkPush.simpleWithResp(pushDetails);
+                try {
+                    BarkPush barkPush = new BarkPush(push.getBarkPushUrl(), push.getBarkPushToken());
+                    PushDetails pushDetails = PushDetails.builder()
+                            .title("苹果商店监控")
+                            .body(content)
+                            .category("苹果商店监控")
+                            .group("Apple Monitor")
+                            .sound(StrUtil.isEmpty(push.getBarkPushSound()) ? SoundEnum.GLASS.getSoundName() : push.getBarkPushSound())
+                            .build();
+                    barkPush.simpleWithResp(pushDetails);
+                } catch (Exception e) {
+                    log.error("Bark 推送失败，继续其余推送渠道", e);
+                }
             }
             if (StrUtil.isNotEmpty(push.getFeishuBotWebhooks())) {
-
-                FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
-                        .text(content).secret(push.getFeishuBotSecret())
-                        .botWebHooks(push.getFeishuBotWebhooks())
-                        .build());
+                try {
+                    FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
+                            .text(content).secret(push.getFeishuBotSecret())
+                            .botWebHooks(push.getFeishuBotWebhooks())
+                            .build());
+                } catch (Exception e) {
+                    log.error("飞书推送失败，继续其余推送渠道", e);
+                }
             }
         });
 
@@ -144,16 +159,17 @@ public class AppleMonitor {
 
                 String content = StrUtil.format(strTemp, storeNames, deviceName, productStatus);
 
-                if (judgingStoreInventory(storeJson, deviceItem.getDeviceCode())) {
+                boolean available = judgingStoreInventory(storeJson, deviceItem.getDeviceCode());
+                if (available) {
                     JSONObject retailStore = storeJson.getJSONObject("retailStore");
                     content += buildPickupInformation(retailStore);
-                    log.info(content);
-
-                    pushAll(content, deviceItem.getPushConfigs());
-
-
                 }
+
                 log.info(content);
+
+                if (available) {
+                    pushAll(content, deviceItem.getPushConfigs());
+                }
             });
 
         } catch (Exception e) {

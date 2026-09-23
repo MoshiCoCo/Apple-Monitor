@@ -57,15 +57,20 @@ public class AppleTaskConfig {
                 log.info("机器人开始干活啦");
                 String content = StrUtil.format("您的机器人开始监控{}附近的Apple直营店啦", location);
 
-                if (StrUtil.isAllNotEmpty(push.getBarkPushUrl(), push.getBarkPushToken())) {
-                    BarkPush pusher = new BarkPush(push.getBarkPushUrl(), push.getBarkPushToken());
-                    pusher.simpleWithResp(content);
-                }
-                if (StrUtil.isNotEmpty(push.getFeishuBotWebhooks())) {
-                    FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
-                            .text(content).secret(push.getFeishuBotSecret())
-                            .botWebHooks(push.getFeishuBotWebhooks())
-                            .build());
+                // 启动通知只是锦上添花，推送失败（超时、网络抖动）不能让监控直接退出
+                try {
+                    if (StrUtil.isAllNotEmpty(push.getBarkPushUrl(), push.getBarkPushToken())) {
+                        BarkPush pusher = new BarkPush(push.getBarkPushUrl(), push.getBarkPushToken());
+                        pusher.simpleWithResp(content);
+                    }
+                    if (StrUtil.isNotEmpty(push.getFeishuBotWebhooks())) {
+                        FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
+                                .text(content).secret(push.getFeishuBotSecret())
+                                .botWebHooks(push.getFeishuBotWebhooks())
+                                .build());
+                    }
+                } catch (Exception e) {
+                    log.warn("启动通知推送失败，不影响后续监控", e);
                 }
 
             });
