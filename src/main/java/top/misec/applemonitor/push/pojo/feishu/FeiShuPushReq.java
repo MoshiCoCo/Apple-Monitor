@@ -19,7 +19,7 @@ public class FeiShuPushReq {
 
     private TextContent content;
 
-    private long timestamp;
+    private Long timestamp;
 
     private String sign;
 

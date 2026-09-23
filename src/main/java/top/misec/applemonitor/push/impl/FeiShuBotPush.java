@@ -1,5 +1,6 @@
 package top.misec.applemonitor.push.impl;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson2.JSONObject;
@@ -25,13 +26,20 @@ public class FeiShuBotPush {
      */
 
     public static void pushTextMessage(FeiShuPushDTO feiShuPushDTO) {
-        long timestamp = System.currentTimeMillis() / 1000;
+        // 只有开启「签名校验」安全设置的机器人需要 timestamp + sign，未配 secret 时不发送这两个字段
+        Long timestamp = null;
+        String sign = null;
+        if (StrUtil.isNotEmpty(feiShuPushDTO.getSecret())) {
+            timestamp = System.currentTimeMillis() / 1000;
+            sign = FeiShuUtils.genSign(feiShuPushDTO.getSecret(), timestamp);
+        }
+
         try (HttpResponse httpResponse = HttpRequest.post(feiShuPushDTO.getBotWebHooks())
                 .body(JSONObject.toJSONString(FeiShuPushReq.builder()
                         .content(TextContent.builder().text(feiShuPushDTO.getText()).build())
                         .timestamp(timestamp)
                         .msgType("text")
-                        .sign(FeiShuUtils.genSign(feiShuPushDTO.getSecret(), timestamp))
+                        .sign(sign)
                         .build()))
                 .execute()) {
             log.info("飞书机器人推送状态:{}", httpResponse.getStatus());

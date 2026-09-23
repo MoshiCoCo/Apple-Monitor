@@ -60,7 +60,7 @@ public class AppleMonitor {
                         .build();
                 barkPush.simpleWithResp(pushDetails);
             }
-            if (StrUtil.isAllNotEmpty(push.getFeishuBotSecret(), push.getFeishuBotWebhooks())) {
+            if (StrUtil.isNotEmpty(push.getFeishuBotWebhooks())) {
 
                 FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
                         .text(content).secret(push.getFeishuBotSecret())

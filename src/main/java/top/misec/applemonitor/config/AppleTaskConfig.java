@@ -61,7 +61,7 @@ public class AppleTaskConfig {
                     BarkPush pusher = new BarkPush(push.getBarkPushUrl(), push.getBarkPushToken());
                     pusher.simpleWithResp(content);
                 }
-                if (StrUtil.isAllNotEmpty(push.getFeishuBotSecret(), push.getFeishuBotWebhooks())) {
+                if (StrUtil.isNotEmpty(push.getFeishuBotWebhooks())) {
                     FeiShuBotPush.pushTextMessage(FeiShuPushDTO.builder()
                             .text(content).secret(push.getFeishuBotSecret())
                             .botWebHooks(push.getFeishuBotWebhooks())
