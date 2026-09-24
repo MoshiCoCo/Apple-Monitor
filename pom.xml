@@ -17,7 +17,7 @@
         <lombok.version>1.18.48</lombok.version>
         <junit.version>6.1.3</junit.version>
         <fastjson2.version>2.0.65</fastjson2.version>
-        <logback.version>1.5.38</logback.version>
+        <logback.version>1.6.3</logback.version>
         <bark-java-sdk.version>0.0.4</bark-java-sdk.version>
 
         <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
